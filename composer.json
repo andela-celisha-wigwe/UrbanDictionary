@@ -1,0 +1,8 @@
+{
+    "autoload" : {
+        "psr-4": {
+            "Elchroy\\UrbanDictionary\\" : "src",
+            "Elchroy\\Tests\\" : "tests"
+        }
+    }
+}
