@@ -1,7 +1,13 @@
 <?php
+namespace Elchroy\UrbanDictionary;
 
-include "word.php";
-include "word_engine.php";
+use Elchroy\UrbanDictioWord;
+use Elchroy\UrbanDictionary\wordEngine;
+use Elchroy\UrbanDictionary\Category;
+
+
+// include "word.php";
+// include "word_engine.php";
 
 $w = new Category;
 

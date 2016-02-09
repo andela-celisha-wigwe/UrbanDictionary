@@ -1,6 +1,6 @@
 <?php
 
-namespace urbandictionary;
+namespace Elchroy\UrbanDictionary;
 
 class Category extends WordEngine
 {
@@ -13,8 +13,8 @@ class Category extends WordEngine
 
     public function categorize($slang, $property = 'sample_sentence')
     {
-        // echo WordEngine::slang_exists($slang);
-        $sentence = $this->main[$slang][$property];
+        // $sentence = $this->main[$slang][$property];
+        $sentence = $this->retrieve($slang, $property);
         return $this->numberOf($sentence);
     }
 
@@ -22,14 +22,16 @@ class Category extends WordEngine
     {
         $count_array = array();
         $words = explode(" ", $sentence);
+        $to_trim = [",", ".", "!"];
         foreach ($words as $word) {
-           $count = $this->getCount($words, $word);
-           $count_array[$word] = $count;
+            $word = trim($word, ".");
+            $count = $this->getCount($words, $word);
+            $count_array[$word] = $count;
         }
         return $count_array;
     }
 
-    public function getCount($words, $word)
+    private function getCount($words, $word)
     {
         $count = 0;
         foreach($words as $second_word){
