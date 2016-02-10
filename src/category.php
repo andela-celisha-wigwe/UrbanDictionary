@@ -13,18 +13,24 @@ class Category extends WordEngine
 
     public function categorize($slang, $property = 'sample_sentence')
     {
-        // $sentence = $this->main[$slang][$property];
         $sentence = $this->retrieve($slang, $property);
-        return $this->numberOf($sentence);
+        return $this->groupOf($sentence);
     }
 
-    public function numberOf($sentence)
+    public function categorize_i($slang, $property = 'sample_sentence')
     {
+        $sentence = $this->retrieve($slang, $property);
+        $sentence = strtolower($sentence);
+        return $this->groupOf($sentence);
+    }
+
+    public function groupOf($sentence)
+    {
+        $sentence = trim($sentence); //trim the sentence of all leading and trailing white spaces
+        $sentence = preg_replace("/[^a-zA-Z0-9\s]/", "", $sentence); // remove all non-alphanumercic charaters.
         $count_array = array();
         $words = explode(" ", $sentence);
-        $to_trim = [",", ".", "!"];
         foreach ($words as $word) {
-            $word = trim($word, ".");
             $count = $this->getCount($words, $word);
             $count_array[$word] = $count;
         }

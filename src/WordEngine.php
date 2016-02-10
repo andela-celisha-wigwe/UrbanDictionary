@@ -2,7 +2,9 @@
 
 namespace Elchroy\UrbanDictionary;
 
-class WordEngine extends Word
+use Elchroy\UrbanDictionary\Word;
+
+class WordEngine
 {
     public $main;
     public $properties = ['slang', 'description', 'sample_sentence'];
@@ -10,10 +12,7 @@ class WordEngine extends Word
 
     public function __construct()
     {
-        $this->main = parent::$data;
-
-
-        // return $this->main;
+        $this->main = Word::$data;
     }
 
     public function getData(){
