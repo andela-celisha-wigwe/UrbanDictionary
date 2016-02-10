@@ -9,8 +9,8 @@ class CategoryTest extends PHPUnit_Framework_TestCase
     public $cat;
     public function setUp()
     {
-        $this->cat = new Category;
-        $this->cat->add("Wahala", "This means trouble", "that wahala is too much wahala and the wahala is too too much");
+        $this->cat = new Category();
+        $this->cat->add('Wahala', 'This means trouble', 'that wahala is too much wahala and the wahala is too too much');
         // $this->main->update("Tight", "This means when someone does somethign exceptinally good and beyond the ordinary", "Prosper has finished the curriculum and he will submit it to Nadayar. Tight Tight Tight");
     }
 
@@ -21,24 +21,25 @@ class CategoryTest extends PHPUnit_Framework_TestCase
 
     public function testCategorizeFunctionWorksForPlainText()
     {
-        $expected = array(
-                        "that" => 1,
-                        "wahala" => 3,
-                        "is" => 2,
-                        "too" => 3,
-                        "much" => 2,
-                        "and" => 1,
-                        "the" => 1
-                    );
-        $categories = $this->cat->categorize("Wahala");
+        $expected = [
+                        "that"      => 1,
+                        "wahala"    => 3,
+                        "is"        => 2,
+                        "too"       => 3,
+                        "much"      => 2,
+                        "and"       => 1,
+                        "the"       => 1,
+                    ];
+        $categories = $this->cat->categorize('Wahala');
         $this->assertEquals($expected, $categories);
     }
 
     public function testCategorizeIFunctionWorksIfCaseModeIsInsensitive()
     {
-        $this->cat->add("Tinz", "This is another way of saying 'things'.", "This this Is is the THIS And and Things things THINGS ");
-        $expected = array("this" => 3, "is" => 2, "the" => 1, "and" => 2, "things" => 3);
-        $categories = $this->cat->categorize_i("Tinz");
+        $this->cat->add('Tinz', "This is another way of saying 'things'.", 'This this Is is the THIS And and Things things THINGS ');
+        // $expected = array("this" => 3, "is" => 2, "the" => 1, "and" => 2, "things" => 3);
+        $expected = ['this' => 3, 'is' => 2, 'the' => 1, 'and' => 2, 'things' => 3];
+        $categories = $this->cat->categorize_i('Tinz');
         $this->assertEquals($expected, $categories);
     }
 

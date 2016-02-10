@@ -29,9 +29,10 @@ class Category extends WordEngine
     public function groupOf($sentence)
     {
         $sentence = trim($sentence); //trim the sentence of all leading and trailing white spaces
-        $sentence = preg_replace("/[^a-zA-Z0-9\s]/", "", $sentence); // remove all non-alphanumercic charaters.
-        $count_array = array();
-        $words = explode(" ", $sentence);
+        $sentence = preg_replace("/[^a-zA-Z0-9\s]/", '', $sentence); // remove all non-alphanumercic charaters.
+        $count_array = [];
+        // $count_array = array();
+        $words = explode(' ', $sentence);
         foreach ($words as $word) {
             $count = $this->getCount($words, $word);
             $count_array[$word] = $count;
@@ -42,12 +43,11 @@ class Category extends WordEngine
     private function getCount($words, $word)
     {
         $count = 0;
-        foreach($words as $second_word){
-            if($word == $second_word){
+        foreach ($words as $second_word) {
+            if ($word == $second_word) {
                 $count++;
             }
         }
         return $count;
     }
 }
-

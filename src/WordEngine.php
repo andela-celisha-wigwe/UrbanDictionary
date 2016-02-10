@@ -2,7 +2,7 @@
 
 namespace Elchroy\UrbanDictionary;
 
-use Elchroy\UrbanDictionary\Word;
+// use Elchroy\UrbanDictionary\Word;
 
 class WordEngine
 {
@@ -16,45 +16,42 @@ class WordEngine
         $this->main = Word::$data;
     }
 
-    public function getData(){
+    public function getData()
+    {
         return $this->main;
     }
 
 
-    public function add($slang, $description, $sentence='')
+    public function add($slang, $description, $sentence = '')
     {
-        if($this->slang_exists($slang)){
+        if ($this->slang_exists($slang)) {
             $this->throwError("'$slang' already exists in the dictionary.");
         }
         $this->main[$slang] = [
             'slang'             => $slang,
             'description'       => $description,
-            'sample_sentence'   => $sentence
+            'sample_sentence'   => $sentence,
             ];
     }
 
-    public function retrieve($slang,$property='description')
+    public function retrieve($slang,$property = 'description')
     {
-        if(!($this->slang_exists($slang)))
-        {
+        if (!($this->slang_exists($slang))) {
             $this->throwError("'$slang' cannot be found in the dictionary.");
         }
-        if(!(in_array($property, $this->properties)))
-        {
+        if (!(in_array($property, $this->properties))) {
             $this->throwError("No defined property - '$property'");
         }
         return $this->main[$slang][$property];
     }
 
-    public function update($slang, $property, $value )
+    public function update($slang, $property, $value)
     {
-        if(!($this->slang_exists($slang)))
-        {
+        if (!($this->slang_exists($slang))) {
             $this->throwError("'$slang' cannot be found in the dictionary.");
         }
 
-        if(!(in_array($property, $this->properties)))
-        {
+        if (!(in_array($property, $this->properties))) {
             $this->throwError("No defined property - '$property'");
         }
         $this->main[$slang][$property] = $value;
@@ -63,20 +60,19 @@ class WordEngine
 
     public function delete($slang)
     {
-        if(!($this->slang_exists($slang))) {
+        if (!($this->slang_exists($slang))) {
             $this->throwError("'$slang' cannot be found in the dictionary.");
         }
         unset($this->main[$slang]);
     }
 
-    function slang_exists($slang)
+    public function slang_exists($slang)
     {
         return array_key_exists($slang, $this->main);
     }
 
-    function throwError($msg)
+    public function throwError($msg)
     {
         throw new \Exception($msg);
     }
 }
-
