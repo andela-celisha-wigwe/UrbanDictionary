@@ -2,8 +2,8 @@
 
 // // namespace Elchroy\Tests;
 
-use Elchroy\UrbanDictionary\Word;
-use Elchroy\UrbanDictionary\WordEngine;
+// use Elchroy\UrbanDictionary\Word;
+// use Elchroy\UrbanDictionary\WordEngine;
 
 // // use \Elchroy\UrbanDictionary\Category;
 // // use Elchroy\Tests\Category;
@@ -13,13 +13,13 @@ use Elchroy\UrbanDictionary\WordEngine;
 
 
 
-class Category extends WordEngine
+class Category extends \Elchroy\UrbanDictionary\WordEngine
 {
     public $main;
 
     public function __construct()
     {
-        $this->main = Word::$data;
+        $this->main = \Elchroy\UrbanDictionary\Word::$data;
     }
 
     public function categorize($slang, $property = 'sample_sentence')
