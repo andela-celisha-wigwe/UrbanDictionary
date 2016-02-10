@@ -1,132 +1,24 @@
 <?php
 
+use Elchroy\Tests;
 use Elchroy\UrbanDictionary\Word;
-use Elchroy\UrbanDictionary\WordEngine;
 
-
-
-class WordTest extends PHPUnit_Framework_TestCase
+class WordTest extends \PHPUnit_Framework_TestCase
 {
-    public $data;
-    public $wordEngine;
+
+    public $word_class;
 
     public function setUp()
     {
-        $this->wordEngine = new WordEngine;
-        $this->wordEngine->add("bromance", "This is the romance that exists between two men.");
-        $this->data = $this->wordEngine->getData();
+        $this->word_class = Word::$data;
     }
 
-    public function testClassContainsOneStaticArray()
+    public function testWordClassHasAStaticVariable ()
     {
-        $this->assertCount(2, $this->data);
+        // var_dump($this->word_class);
+        print_r($this->word_class);
+        $this->assertArrayHasKey("tight", $this->word_class);
     }
 
-    /**
-    *  @expectedException Exception
-    *  @expectedExceptionMessage 'bromance' already exists in the dictionary.
-    */
-    public function testAddFuncitonFailsForAlreadyExistingSlang()
-    {
-        $this->wordEngine->add("bromance", "This is another description for the word. This should fail.");
-    }
-
-    public function testAddFunctionWorksForANewWord()
-    {
-        $initial_count = count($this->wordEngine->main);
-        $this->wordEngine->add("wetin", "Another way of saying 'What?'.");
-        $final_count = count($this->wordEngine->main);
-        $this->assertEquals(1, ($final_count - $initial_count));
-    }
-
-    /**
-    *  @expectedException Exception
-    *  @expectedExceptionMessage 'badt' cannot be found in the dictionary.
-    */
-    public function testDeleteFunctionFailsIfSlangDoesNotExist()
-    {
-        $this->wordEngine->delete('badt');
-    }
-
-    public function testDeleteFunctionWorks()
-    {
-        $initial_count = count($this->wordEngine->main);
-        $this->wordEngine->delete("bromance");
-        $final_count = count($this->wordEngine->main);
-        $this->assertEquals(-1, ($final_count - $initial_count));
-        $this->assertNotContains("bromance", array_keys($this->wordEngine->main));
-    }
-
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage 'badt' cannot be found in the dictionary.
-     */
-    public function testUpdateFunctionFailsIfSlangDoesNotExist()
-    {
-        $this->wordEngine->delete('badt');
-    }
-
-    public function testUpdateFunctionWorksIfTheSlangExistsInTheDictionary()
-    {
-        $this->wordEngine->update("bromance", "description", "This is the updated description for the slang.");
-        $this->wordEngine->update("bromance", "sample_sentence", "This is the updated sample_sentence for the slang.");
-        $this->assertEquals("This is the updated description for the slang.", $this->wordEngine->main["bromance"]["description"]);
-        $this->assertEquals("This is the updated sample_sentence for the slang.", $this->wordEngine->main["bromance"]["sample_sentence"]);
-    }
-
-    /**
-     *  @expectedException Exception
-     *  @expectedExceptionMessage 'badt' cannot be found in the dictionary.
-     */
-    public function testRetrieveFunctionFailsIfSlangDoesNotExistsInTheDictionary()
-    {
-        $this->wordEngine->retrieve("badt");
-    }
-
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage No defined property - 'usage'
-     */
-    public function testRetrieveFunctionFailsIfWrongPropertyIsProvidedAsSecondArgument()
-    {
-        $this->wordEngine->retrieve("bromance", "usage");
-    }
-
-
-
-    public function testRetrieveFunctionWorksIfSlangExistsInTheDictionary()
-    {
-        $this->wordEngine->add("sup", "This is another way of saying What's Up", "Hey Bro, Sup!!!");
-        $descriptiona = $this->wordEngine->retrieve("bromance");
-        $this->assertEquals("This is the romance that exists between two men.", $descriptiona);
-        $descriptionb = $this->wordEngine->retrieve("bromance", "description");
-        $this->assertEquals("This is the romance that exists between two men.", $descriptionb);
-        $sample_sentencea = $this->wordEngine->retrieve("bromance", "sample_sentence");
-        $this->assertEquals("", $sample_sentencea);
-        $sample_sentenceb = $this->wordEngine->retrieve("sup", "sample_sentence");
-        $this->assertEquals("Hey Bro, Sup!!!", $sample_sentenceb);
-    }
+    // public function testWord
 }
-
-
-// class WordTest extends PHPUnit_Framework_TestCase
-// {
-//     public $word;
-
-//     public function setUp() {
-//         $this->word = new Word();
-//     }
-
-//     public function testLength() {
-//         $this->assertEquals();
-//     }
-
-
-//     public function testKeys()
-//     {
-
-//         $this->assertContains("Tight", $word);
-//     }
-
-//     // public function testWord
-// }

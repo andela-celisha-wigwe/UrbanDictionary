@@ -1,19 +1,6 @@
 <?php
 
-// // namespace Elchroy\Tests;
-
-// use Elchroy\UrbanDictionary\Word;
-// use Elchroy\UrbanDictionary\WordEngine;
-
-// // use \Elchroy\UrbanDictionary\Category;
-// use Elchroy\UrbanDictionary\Category;
 use Elchroy\UrbanDictionary\Category;
-// // use Elchroy\UrbanDictionary\WordEngine;
-// //
-// include 'Category.php';
-
-
-
 
 
 
