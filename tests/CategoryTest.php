@@ -5,7 +5,7 @@ namespace Elchroy\Tests;
 // use Elchroy\UrbanDictionary\Word;
 // use Elchroy\UrbanDictionary\WordEngine;
 
-use Elchroy\UrbanDictionary\Category;
+use Elchroy\UrbanDictionary\Category as Category;
 
 
 class CategoryTest extends \PHPUnit_Framework_TestCase
