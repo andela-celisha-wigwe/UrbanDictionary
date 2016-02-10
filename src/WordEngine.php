@@ -7,6 +7,7 @@ use Elchroy\UrbanDictionary\Word;
 class WordEngine
 {
     public $main;
+
     public $properties = ['slang', 'description', 'sample_sentence'];
 
 
@@ -22,14 +23,13 @@ class WordEngine
 
     public function add($slang, $description, $sentence='')
     {
-        if($this->slang_exists($slang))
-        {
+        if($this->slang_exists($slang)){
             $this->throwError("'$slang' already exists in the dictionary.");
         }
-            $this->main[$slang] = [
-                'slang' => $slang,
-                'description' => $description,
-                'sample_sentence' => $sentence
+        $this->main[$slang] = [
+            'slang'             => $slang,
+            'description'       => $description,
+            'sample_sentence'   => $sentence
             ];
     }
 
@@ -63,8 +63,7 @@ class WordEngine
 
     public function delete($slang)
     {
-        if(!($this->slang_exists($slang)))
-        {
+        if(!($this->slang_exists($slang))) {
             $this->throwError("'$slang' cannot be found in the dictionary.");
         }
         unset($this->main[$slang]);
