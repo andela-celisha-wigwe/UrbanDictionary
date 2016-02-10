@@ -2,6 +2,8 @@
 
 namespace Elchroy\UrbanDictionary;
 
+use Elchroy\UrbanDictionary\Word;
+
 class Category extends WordEngine
 {
     public $main;
