@@ -38,7 +38,7 @@ class CategoryTest extends PHPUnit_Framework_TestCase
     public function testCategorizeIFunctionWorksIfCaseModeIsInsensitive()
     {
         $this->cat->add("Tinz", "This is another way of saying 'things'.", "This this Is is the THIS And and Things things THINGS ");
-        $expected = ["this" => 3, "is" => 2, "the" => 1, "and" => 2, "things" => 3];
+        $expected = array("this" => 3, "is" => 2, "the" => 1, "and" => 2, "things" => 3);
         $categories = $this->cat->categorize_i("Tinz");
         $this->assertEquals($expected, $categories);
     }
@@ -46,7 +46,7 @@ class CategoryTest extends PHPUnit_Framework_TestCase
     public function testCategorizeFunctionWorksAndEliminatesNoisyCharacterFromSentence()
     {
         $this->cat->add("Sup", "This means 'What up...?'.", "Hey,÷≥ ÷≥÷hey÷÷≥≤ªº§¶•, ¶§∞•¢sup Sup ª•§∞¢¶§SUP º•ª¶§∞sup");
-        $expected = ["Hey" => 1, "hey" => 1, "sup" => 2, "Sup" => 1, "SUP" => 1];
+        $expected = array("Hey" => 1, "hey" => 1, "sup" => 2, "Sup" => 1, "SUP" => 1);
         $categories = $this->cat->categorize("Sup");
         $this->assertEquals($expected, $categories);
     }
@@ -55,7 +55,7 @@ class CategoryTest extends PHPUnit_Framework_TestCase
     public function testCategorizeFunctionWorksForSentencesThatIncludeNumbers()
     {
         $this->cat->add("Supa", "This means 'What up again...?'.", "Hey, hey, sup, Sup, SUP, sup, 1 1 1 1 ");
-        $expected = ["Hey" => 1, "hey" => 1, "sup" => 2, "Sup" => 1, "SUP" => 1, "1" => 4];
+        $expected = array("Hey" => 1, "hey" => 1, "sup" => 2, "Sup" => 1, "SUP" => 1, "1" => 4);
         $categories = $this->cat->categorize("Supa");
         $this->assertEquals($expected, $categories);
     }
