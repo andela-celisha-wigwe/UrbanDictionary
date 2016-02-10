@@ -22,7 +22,7 @@ class CategoryTest extends PHPUnit_Framework_TestCase
 
     public function testCategorizeFunctionWorksForPlainText()
     {
-        $expected = [
+        $expected = array(
                         "that" => 1,
                         "wahala" => 3,
                         "is" => 2,
@@ -30,7 +30,7 @@ class CategoryTest extends PHPUnit_Framework_TestCase
                         "much" => 2,
                         "and" => 1,
                         "the" => 1
-                    ];
+                    );
         $categories = $this->cat->categorize("Wahala");
         $this->assertEquals($expected, $categories);
     }
