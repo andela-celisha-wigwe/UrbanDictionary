@@ -5,7 +5,7 @@ namespace Elchroy\Tests;
 // use Elchroy\UrbanDictionary\Word;
 // use Elchroy\UrbanDictionary\WordEngine;
 
-use Elchroy\UrbanDictionary\Category as Category;
+// use Elchroy\UrbanDictionary\Category as Category;
 
 
 class CategoryTest extends \PHPUnit_Framework_TestCase
@@ -13,7 +13,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     public $cat;
     public function setUp()
     {
-        $this->cat = new Category;
+        $this->cat = new \Elchroy\UrbanDictionary\Category;
         $this->cat->add("Wahala", "This means trouble", "that wahala is too much wahala and the wahala is too too much");
         // $this->main->update("Tight", "This means when someone does somethign exceptinally good and beyond the ordinary", "Prosper has finished the curriculum and he will submit it to Nadayar. Tight Tight Tight");
     }

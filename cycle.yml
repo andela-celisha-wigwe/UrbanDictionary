@@ -5,4 +5,4 @@ machine:
 
 test:
     override:
-        - phpunit tests
+        - phpunit -c phpunit.xml
