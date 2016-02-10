@@ -4,5 +4,9 @@
             "Elchroy\\UrbanDictionary\\" : "src",
             "Elchroy\\Tests\\" : "tests"
         }
+    },
+
+    "require-dev" : {
+        "satooshi/php-coveralls" : "^1.0"
     }
 }
