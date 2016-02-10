@@ -6,6 +6,7 @@
 // use Elchroy\UrbanDictionary\WordEngine;
 
 // // use \Elchroy\UrbanDictionary\Category;
+// use Elchroy\UrbanDictionary\Category;
 use Elchroy\UrbanDictionary\Category;
 // // use Elchroy\UrbanDictionary\WordEngine;
 // //
