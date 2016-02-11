@@ -61,13 +61,23 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
      */
     public function testUpdateFunctionFailsIfSlangDoesNotExist()
     {
-        $this->wordEngine->delete('badt');
+        $this->wordEngine->update('badt', 'This is the definition of a very very bad guy!', 'description');
     }
+
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage Wrong number of arguments: Please specify updated value.
+     */
+    public function testUpdateFunctionFailsIfWrongNumberOfParametersAreGiven()
+    {
+        $this->wordEngine->update('bromance');
+    }
+
 
     public function testUpdateFunctionWorksIfTheSlangExistsInTheDictionary()
     {
-        $this->wordEngine->update('bromance', 'description', 'This is the updated description for the slang.');
-        $this->wordEngine->update('bromance', 'sample_sentence', 'This is the updated sample_sentence for the slang.');
+        $this->wordEngine->update('bromance', 'This is the updated description for the slang.', 'description');
+        $this->wordEngine->update('bromance', 'This is the updated sample_sentence for the slang.', 'sample_sentence');
         $this->assertEquals('This is the updated description for the slang.', $this->wordEngine->main['bromance']['description']);
         $this->assertEquals('This is the updated sample_sentence for the slang.', $this->wordEngine->main['bromance']['sample_sentence']);
     }
@@ -103,5 +113,19 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("", $sample_sentencea);
         $sample_sentenceb = $this->wordEngine->retrieve("sup", "sample_sentence");
         $this->assertEquals("Hey Bro, Sup!!!", $sample_sentenceb);
+    }
+
+
+    public function testsSlangExistsFunctionReturnTrueIfSlangParameterIsInTheDictionary()
+    {
+        $slang_exists = $this->wordEngine->slang_exists('bromance');
+        $this->assertTrue(true, $slang_exists);
+    }
+
+    public function testsSlangExistsFunctionReturnFalseIfSlangParameterIsNotInTheDictionary()
+    {
+        $slang_exists = $this->wordEngine->slang_exists('nonExistingWord');
+        var_dump($slang_exists);
+        $this->assertNotTrue(false, $slang_exists);
     }
 }
