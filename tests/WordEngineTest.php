@@ -75,6 +75,16 @@ class WordEngineTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage No defined property - 'UnrecognizedProperty'
+     */
+    public function testUpdateFunctionFailsIfPropertyDoesNotExist()
+    {
+        $this->wordEngine->update('bromance', 'this is the value to update', 'UnrecognizedProperty');
+    }
+
+
     public function testUpdateFunctionWorksIfTheSlangExistsInTheDictionary()
     {
         $this->wordEngine->update('bromance', 'This is the updated description for the slang.', 'description');
