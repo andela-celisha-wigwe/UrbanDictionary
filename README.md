@@ -9,10 +9,12 @@
 This package is a Urban Dictionary built with PHP. It contains slangs (urban words), with some descriptions of those words and some sample sentences showing how to use such slangs.
 
 ##**INSTALLATION**
-This package requires both PHP 5.5+ and [Composer](https://getcomposer.org/)
-'$ composer require Elchroy/UrbanDictionary'
+This package requires both [PHP 5.5+](http://php.net/) and [Composer](https://getcomposer.org/)
+
+`$ composer require Elchroy/UrbanDictionary`
 
 ##**USAGE**
+
 
 ###**Word**
 This class contains a static associative array. It defines the structure for storing the slangs in the dictionary.
@@ -23,6 +25,7 @@ $slang->getStaticSlang(); // ==> tight
 $slang->getStaticDescription(); // ==> When someone perform an awesome task
 $slang->getStaticSentence(); // ==> Prosper has finished the curriculum, Tight.
 ```
+
 
 ###**WordEngine**
 This class is the 'dynamic' array that contains slangs. It is the dictionary. You can add to, update, retrieve, and delete from the dictionary.
@@ -36,7 +39,6 @@ $slang->retrieve('Naa', 'sample_sentence'); // ==> This is the updated value of 
 $slang->delete('Naa'); // This deletes the slang from the dictionary.
 $slang->retrieve('Naa'); // This returns an error, since the slang 'Naa' has been deleted from the dictionary.
 ```
-####***Other methods in this class include***
 
 
 ###**Category**
@@ -50,3 +52,8 @@ $slang->categorize('Naa');  // This is the case-sensitive function.
 $slang->categorize_i('Naa'); // This is the case-insensitive function
 // ==> ['Naa' => 2, 'I' => 2, 'do' => 3, 'not' => 2, 'think' => 1, 'so' => 1, 'want' => 1, 'to' => 1, 'come' => 1, 'there' => 1]
 ```
+
+
+###**Test**
+For tests, run `phpunit` from command line (WindowsOS) or terminal(MacOS).
+*Ensure to cd to the application directory.*
