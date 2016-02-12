@@ -18,4 +18,19 @@ class WordTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey("tight", $this->word_class);
     }
 
+    public function testGetStaticSlangFunctionReturnsStaticSlangName()
+    {
+        $this->assertEquals('tight', Word::getStaticSlang('tight'));
+    }
+
+    public function testGetStaticDescriptionFunctionReturnsStaticDescription()
+    {
+        $this->assertEquals('When someone performs an awesome task', Word::getStaticDescription('tight'));
+    }
+
+    public function testGetStaticDescriptionFunctionReturnsStaticSampleSentence()
+    {
+        $this->assertEquals('Prosper has finished the curriculum, Tight.', Word::getStaticSentence('tight'));
+    }
+
 }

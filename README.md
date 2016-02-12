@@ -22,7 +22,7 @@ This class is in the 'src/Word.php' file and in the `Elchroy\UrbanDictionary` na
 ```
 $slang = new Word(); // Create a new instance of the Word class.
 $slang->getStaticSlang(); // ==> tight
-$slang->getStaticDescription(); // ==> When someone perform an awesome task
+$slang->getStaticDescription(); // ==> When someone performs an awesome task
 $slang->getStaticSentence(); // ==> Prosper has finished the curriculum, Tight.
 ```
 
