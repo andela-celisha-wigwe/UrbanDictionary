@@ -40,7 +40,7 @@ class WordEngine
     // Retrieve - This function retrieves infomration about a given slang.
     // The first argument is the slang. This is compulsory.
     // the second argument is the property whose value is to be retrieved. This is optional and defaults to 'description'
-    public function retrieve($slang,$property = 'description')
+    public function retrieve($slang, $property = 'description')
     {
         if (!($this->slang_exists($slang))) {
             // Throw an error is the slang to be retrieved is not found in the dictionary

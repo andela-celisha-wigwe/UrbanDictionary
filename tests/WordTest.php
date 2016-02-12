@@ -18,5 +18,4 @@ class WordTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey("tight", $this->word_class);
     }
 
-    // public function testWord
 }

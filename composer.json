@@ -1,9 +1,23 @@
 {
+    "name" : "Elchroy/UrbanDictionary",
+    "description" : "This is an Urban Dictionary. It contains slangs, their descriptions and some sample sentences showing simple usage of the slang",
+    "license" : "MIT",
+    "authors" : [
+                    {
+                        "name" : "andela-celisha-wigwe",
+                        "email" : "chijioke.elisha-wigwe@andela.com"
+                    }
+                ],
+
     "autoload" : {
         "psr-4": {
             "Elchroy\\UrbanDictionary\\" : "src",
             "Elchroy\\Tests\\" : "tests"
         }
+    },
+
+    "require" : {
+        "php" : ">=5.5"
     },
 
     "require-dev" : {
