@@ -42,10 +42,10 @@ class WordEngine
     // the second argument is the property whose value is to be retrieved. This is optional and defaults to 'description'
     public function retrieve($slang, $property = 'description')
     {
-        if (!($this->slang_exists($slang))) {
+        if (!($this->slang_exists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
             // Throw an error is the slang to be retrieved is not found in the dictionary
-            $this->throwError("'$slang' cannot be found in the dictionary.");
-        }
+            // $this->throwError("'$slang' cannot be found in the dictionary.");
+        // }
         if (!(in_array($property, $this->properties))) {
             // Throw an error is the property to be retireved is not listed as one of the properties of the words in the dictionary
             $this->throwError("No defined property - '$property'");
