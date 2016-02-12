@@ -1,9 +1,10 @@
 <?php
-
+namespace Elchroy\Tests;
 use Elchroy\UrbanDictionary\Word;
 use Elchroy\UrbanDictionary\WordEngine;
+use Elchroy\UrbanDictionary\WordException as Exception;
 
-class WordEngineTest extends PHPUnit_Framework_TestCase
+class WordEngineTest extends \PHPUnit_Framework_TestCase
 {
     public $data;
     public $wordEngine;
@@ -21,7 +22,7 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage 'bromance' already exists in the dictionary.
      */
     public function testAddFuncitonFailsForAlreadyExistingSlang()
@@ -38,7 +39,7 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Exception
+     *  @expectedException Elchroy\UrbanDictionary\WordException
      *  @expectedExceptionMessage 'badt' cannot be found in the dictionary.
      */
     public function testDeleteFunctionFailsIfSlangDoesNotExist()
@@ -56,7 +57,7 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage 'badt' cannot be found in the dictionary.
      */
     public function testUpdateFunctionFailsIfSlangDoesNotExist()
@@ -65,7 +66,7 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage Wrong number of arguments: Please specify updated value.
      */
     public function testUpdateFunctionFailsIfWrongNumberOfParametersAreGiven()
@@ -83,7 +84,7 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Exception
+     *  @expectedException Elchroy\UrbanDictionary\WordException
      *  @expectedExceptionMessage 'badt' cannot be found in the dictionary.
      */
     public function testRetrieveFunctionFailsIfSlangDoesNotExistsInTheDictionary()
@@ -92,7 +93,7 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage No defined property - 'usage'
      */
     public function testRetrieveFunctionFailsIfWrongPropertyIsProvidedAsSecondArgument()
@@ -104,13 +105,13 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
 
     public function testRetrieveFunctionWorksIfSlangExistsInTheDictionary()
     {
-        $this->wordEngine->add("sup", "This is another way of saying What's Up", "Hey Bro, Sup!!!");
         $descriptiona = $this->wordEngine->retrieve("bromance");
         $this->assertEquals("This is the romance that exists between two men.", $descriptiona);
         $descriptionb = $this->wordEngine->retrieve("bromance", "description");
         $this->assertEquals("This is the romance that exists between two men.", $descriptionb);
         $sample_sentencea = $this->wordEngine->retrieve("bromance", "sample_sentence");
         $this->assertEquals("", $sample_sentencea);
+        $this->wordEngine->add("sup", "This is another way of saying What's Up", "Hey Bro, Sup!!!");
         $sample_sentenceb = $this->wordEngine->retrieve("sup", "sample_sentence");
         $this->assertEquals("Hey Bro, Sup!!!", $sample_sentenceb);
     }
@@ -125,7 +126,6 @@ class WordEngineTest extends PHPUnit_Framework_TestCase
     public function testsSlangExistsFunctionReturnFalseIfSlangParameterIsNotInTheDictionary()
     {
         $slang_exists = $this->wordEngine->slang_exists('nonExistingWord');
-        var_dump($slang_exists);
         $this->assertNotTrue(false, $slang_exists);
     }
 }

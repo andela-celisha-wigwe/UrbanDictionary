@@ -16,38 +16,34 @@ class Category extends WordEngine
     public function categorize($slang, $property = 'sample_sentence')
     {
         $sentence = $this->retrieve($slang, $property);
-        return $this->groupOf($sentence);
+        return $this->group($sentence);
     }
 
     public function categorize_i($slang, $property = 'sample_sentence')
     {
         $sentence = $this->retrieve($slang, $property);
         $sentence = strtolower($sentence);
-        return $this->groupOf($sentence);
+        return $this->group($sentence);
     }
 
-    public function groupOf($sentence)
+    protected function group($sentence)
     {
-        $sentence = trim($sentence); //trim the sentence of all leading and trailing white spaces
-        $sentence = preg_replace("/[^a-zA-Z0-9\s]/", '', $sentence); // remove all non-alphanumercic charaters.
-        $count_array = [];
-        // $count_array = array();
-        $words = explode(' ', $sentence);
-        foreach ($words as $word) {
-            $count = $this->getCount($words, $word);
-            $count_array[$word] = $count;
-        }
-        return $count_array;
+        $sentence = $this->removeNonAlphaNum($sentence);
+        $words = explode(' ', $sentence); // Create an array of all words.
+        $counts = (array_map(function ($word) use ($words) {return $this->getCount($words, $word);}, $words)); // Create an array of number of occurences of each word.
+        return array_combine($words, $counts); // Combine the two arrays and return the combined array. $words as keys, $counts as values
     }
 
-    private function getCount($words, $word)
+    protected function removeNonAlphaNum($sentence)
+    {
+        $sentence = trim($sentence);
+        return preg_replace("/[^a-zA-Z0-9\s]/", '', $sentence); // remove all non-alphanumercic charaters.
+    }
+
+    protected function getCount($words, $word)
     {
         $count = 0;
-        foreach ($words as $second_word) {
-            if ($word == $second_word) {
-                $count++;
-            }
-        }
+        array_map(function($word2) use (&$word, &$count) {return $word2 == $word ? $count++ : $count ;}, $words);
         return $count;
     }
 }

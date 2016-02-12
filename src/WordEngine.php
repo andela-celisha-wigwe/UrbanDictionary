@@ -2,14 +2,13 @@
 
 namespace Elchroy\UrbanDictionary;
 
-// use Elchroy\UrbanDictionary\Word;
+// use Elchroy\UrbanDictionary\WordException;
 
 class WordEngine
 {
     public $main;
 
     public $properties = ['slang', 'description', 'sample_sentence'];
-
 
     public function __construct()
     {
@@ -102,7 +101,7 @@ class WordEngine
     // ThrowError - This method throws an error to the Exceton class.
     public function throwError($msg)
     {
-        // Throw an Exception with a customized message that depends on waht was passed to it.
-        throw new \Exception($msg);
+        // Throw a new WordException with a customized message that depends on what was passed to it.
+        throw new WordException($msg);
     }
 }
