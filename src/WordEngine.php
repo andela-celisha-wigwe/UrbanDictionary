@@ -26,9 +26,8 @@ class WordEngine
     // Third argument is a sample sentence showing how the new slang can be used. This is optional and defaults to an empty string.
     public function add($slang, $description, $sentence = '')
     {
-        if ($this->slang_exists($slang)) {
-            $this->throwError("'$slang' already exists in the dictionary.");
-        }
+        // Throw an error if the slang already exists inside the dictionary.
+        if ($this->slang_exists($slang)) { $this->throwError("'$slang' already exists in the dictionary."); }
         $this->main[$slang] = [
             'slang'             => $slang,
             'description'       => $description,
@@ -42,14 +41,10 @@ class WordEngine
     // the second argument is the property whose value is to be retrieved. This is optional and defaults to 'description'
     public function retrieve($slang, $property = 'description')
     {
+        // Throw an error is the slang to be retrieved is not found in the dictionary
         if (!($this->slang_exists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
-            // Throw an error is the slang to be retrieved is not found in the dictionary
-            // $this->throwError("'$slang' cannot be found in the dictionary.");
-        // }
-        if (!(in_array($property, $this->properties))) {
-            // Throw an error is the property to be retireved is not listed as one of the properties of the words in the dictionary
-            $this->throwError("No defined property - '$property'");
-        }
+        // Throw an error is the property to be retireved is not listed as one of the properties of the words in the dictionary
+        if (!(in_array($property, $this->properties))) {$this->throwError("No defined property - '$property'");}
         //If everything is OK, return the value of the property that was asked for.
         return $this->main[$slang][$property];
     }
@@ -60,20 +55,12 @@ class WordEngine
     // The third value is the property whose value is to be updated. THis is optional and defaults to 'description'
     public function update($slang, $value = '', $property = 'description')
     {
-        if (func_num_args() < 2) {
-            // Throw an error if the number of arguments passed to thge function is less than 2.
-            $this->throwError('Wrong number of arguments: Please specify updated value.');
-        }
-
-        if (!($this->slang_exists($slang))) {
-            // Throw an error if the slang the first argument given to the function does not exist in the dictionary
-            $this->throwError("'$slang' cannot be found in the dictionary.");
-        }
-
-        if (!(in_array($property, $this->properties))) {
-            // Throw an error is the property to be updated is not among the defined properties of the words in the dictionary.
-            $this->throwError("No defined property - '$property'");
-        }
+        // Throw an error if the number of arguments passed to thge function is less than 2.
+        if (func_num_args() < 2) { $this->throwError('Wrong number of arguments: Please specify updated value.'); }
+        // Throw an error if the slang the first argument given to the function does not exist in the dictionary
+        if (!($this->slang_exists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
+        // Throw an error is the property to be updated is not among the defined properties of the words in the dictionary.
+        if (!(in_array($property, $this->properties))) { $this->throwError("No defined property - '$property'"); }
         // If everything is OK, return the main array (the dicitonary array) with the updated information.
         $this->main[$slang][$property] = $value;
         return $this->main;
@@ -83,10 +70,8 @@ class WordEngine
     // The argument is the slang to be deleted.
     public function delete($slang)
     {
-        if (!($this->slang_exists($slang))) {
-            // Throw an error if the slang to be deleted is not found in the dictionary.
-            $this->throwError("'$slang' cannot be found in the dictionary.");
-        }
+        // Throw an error if the slang to be deleted is not found in the dictionary.
+        if (!($this->slang_exists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
         // If everything is OK, delete(unset) the slang from the main array (that contains the diciotnary words)
         unset($this->main[$slang]);
     }
