@@ -2,57 +2,94 @@
 
 namespace Elchroy\UrbanDictionary;
 
-// use Elchroy\UrbanDictionary\WordException;
-
+/**
+ * The wordEngine. Has an associative arrayof words thus the urban dictionary.
+ * It can add slangs to this array, retrieve infomation from the dicitonary.
+ * It can also update certain properties of word in the array and can delete slang from the array.
+ */
 class WordEngine
 {
+    /**
+     * $main THe public varaible. This is accessible to both the class and its instances.
+     * @var array
+     */
     public $main;
 
-    public $properties = ['slang', 'description', 'sample_sentence'];
+    /**
+     * $properties The array of all properties of slangs inside the dicntionary. This is a private variable
+     * @var array
+     */
+    private static $properties = ['slang', 'description', 'sample_sentence'];
 
+    /**
+     * __construct Assigns some randome data inside the public main array.
+     */
     public function __construct()
     {
-        $this->main = Word::$data;
+        $this->main = [
+            'tight' => [
+                            'slang'             => 'tight',
+                            'description'       => 'When someone performs an awesome task',
+                            'sample_sentence'   => 'Prosper has finished the curriculum, Tight.',
+                        ]
+        ];
     }
 
-    public function getData()
-    {
-        return $this->main;
-    }
+    // public function getData()
+    // {
+    //     return $this->main;
+    // }
 
-    // Add - This adds words to the dictionary array.
-    // First argument is the slang to be added. This is compulsory
-    // Second argument is the description (meaning) of the slang that was given. This is also compusory.
-    // Third argument is a sample sentence showing how the new slang can be used. This is optional and defaults to an empty string.
-    public function add($slang, $description, $sentence = '')
+    /**
+     * [add description] - Adds a slang to the main array of the urban dicitonary.
+     * Throws and error if the slang to be added is already existng in the dictioanry.
+     * @param string $slang       the slang to be added to dictionary
+     * @param string $description a brief description or meaning of he slang to be added to the dictionary. Not optional
+     * @param string $sample_sentence    A sample sentece showing a simple usage of the slang. THis is optinal
+     * @return array The main array with the new slang added to it.
+     */
+    public function add($slang, $description, $sample_sentence = '')
     {
         // Throw an error if the slang already exists inside the dictionary.
         if ($this->slang_exists($slang)) { $this->throwError("'$slang' already exists in the dictionary."); }
         $this->main[$slang] = [
             'slang'             => $slang,
             'description'       => $description,
-            'sample_sentence'   => $sentence,
+            'sample_sentence'   => $sample_sentence,
             ];
+        return $this->main;
     }
 
 
-    // Retrieve - This function retrieves infomration about a given slang.
-    // The first argument is the slang. This is compulsory.
-    // the second argument is the property whose value is to be retrieved. This is optional and defaults to 'description'
+    /**
+     * [retrieve description] - Retrieves informstion form the main array.
+     * Throws an exceptio if the given slang is not founc in the dictionary
+     * Throws an exception if the property to be retrieved is not amnong the properties array.
+     * @param  string $slang    The slang whose data is to be retrieved.
+     * @param  string $property The property whose value is to be retrieved. This defaults to description but can be set as the sample usage sentence.
+     * @return string - The value of the property as defined byt the property paramenter/argument.
+     */
     public function retrieve($slang, $property = 'description')
     {
         // Throw an error is the slang to be retrieved is not found in the dictionary
         if (!($this->slang_exists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
         // Throw an error is the property to be retireved is not listed as one of the properties of the words in the dictionary
-        if (!(in_array($property, $this->properties))) {$this->throwError("No defined property - '$property'");}
+        if (!(in_array($property, self::$properties))) {$this->throwError("No defined property - '$property'");}
         //If everything is OK, return the value of the property that was asked for.
         return $this->main[$slang][$property];
     }
 
-    // Update - This methods updates the slang with new values as given in the arguments
-    // The first argument is the slang to be updated. This value must be provided. Not optional
-    // The second value is value to be provided. This must be provided.
-    // The third value is the property whose value is to be updated. THis is optional and defaults to 'description'
+    /**
+     * [update description] - Updated a slang in the main dicitonary array with upates passed in as arguments.
+     * Throws an exception if the number of argument given to the function is less than 2.
+     * Thwows an exception if the number of aguments given to the function is more than 3.
+     * Throws an exception if the slang is not found in the main array.
+     * Throws an exception if the property to be updated is not among the properties array.
+     * @param  string $slang - the slang ti be updated. THis is the key of the main array.
+     * @param  string $value  - The new value with which to update the property.  THis must be provided.
+     * @param  string $property - The is the property to update. It defaults to the description but can be set to the sample sentence.
+     * @return array - The main array with the update effected.
+     */
     public function update($slang, $value = '', $property = 'description')
     {
         // Throw an error if the number of arguments passed to thge function is less than 2.
@@ -60,30 +97,42 @@ class WordEngine
         // Throw an error if the slang the first argument given to the function does not exist in the dictionary
         if (!($this->slang_exists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
         // Throw an error is the property to be updated is not among the defined properties of the words in the dictionary.
-        if (!(in_array($property, $this->properties))) { $this->throwError("No defined property - '$property'"); }
+        if (!(in_array($property, self::$properties))) { $this->throwError("No defined property - '$property'"); }
         // If everything is OK, return the main array (the dicitonary array) with the updated information.
         $this->main[$slang][$property] = $value;
         return $this->main;
     }
 
-    // Delete - This method deletes a slang from the dictionary array. It accepts only one argument.
-    // The argument is the slang to be deleted.
+    /**
+     * [delete description] - Deletes a slang from the main array by unsetting the slang key within the main array
+     * @param  string $slang This is the slang to be deleted from the main array. Throws an exepotion if the slang cannot be found
+     * @return array - Return the array with the slang deleted.
+     */
     public function delete($slang)
     {
         // Throw an error if the slang to be deleted is not found in the dictionary.
         if (!($this->slang_exists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
         // If everything is OK, delete(unset) the slang from the main array (that contains the diciotnary words)
         unset($this->main[$slang]);
+        return $this->main;
     }
 
-    // SlangExitst. This method return TRUE is a slang exists int he main dictioanry. Otherwise, it returns FALSE
+    /**
+     * [slang_exists description] - Checks whether a slang is inside the main array.
+     * @param  string $slang the slang to be searched for inside the main array.
+     * @return bool  - true is the slang exists or false otherwise.
+     */
     public function slang_exists($slang)
     {
         // Return true if the given slang exists in the dictionary. Otherwise, return false.
         return array_key_exists($slang, $this->main);
     }
 
-    // ThrowError - This method throws an error to the Exceton class.
+    /**
+     * [throwError description] Throws an exception depending ont he message that was given to it.
+     * @param  string $msg The message to be displayed as the excetion pesssage when caught.
+     * @return Stops the flow of code because an exception is thrown.
+     */
     public function throwError($msg)
     {
         // Throw a new WordException with a customized message that depends on what was passed to it.

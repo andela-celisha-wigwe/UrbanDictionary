@@ -13,12 +13,6 @@ class WordEngineTest extends \PHPUnit_Framework_TestCase
     {
         $this->wordEngine = new WordEngine();
         $this->wordEngine->add('bromance', 'This is the romance that exists between two men.');
-        $this->data = $this->wordEngine->getData();
-    }
-
-    public function testClassContainsOneStaticArray()
-    {
-        $this->assertCount(2, $this->data);
     }
 
     /**
