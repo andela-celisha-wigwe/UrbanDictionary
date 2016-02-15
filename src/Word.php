@@ -8,21 +8,21 @@ class Word
             'tight' => [
                             'slang'             => 'tight',
                             'description'       => 'When someone performs an awesome task',
-                            'sample_sentence'   => 'Prosper has finished the curriculum, Tight.'
+                            'sample_sentence'   => 'Prosper has finished the curriculum, Tight.',
                         ]
         ];
 
-    static function getStaticSlang()
+    public static function getStaticSlang()
     {
         return self::$data['tight']['slang'];
     }
 
-    static function getStaticDescription()
+    public static function getStaticDescription()
     {
         return self::$data['tight']['description'];
     }
 
-    static function getStaticSentence()
+    public static function getStaticSentence()
     {
         return self::$data['tight']['sample_sentence'];
     }

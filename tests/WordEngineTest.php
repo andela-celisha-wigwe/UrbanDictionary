@@ -87,10 +87,14 @@ class WordEngineTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateFunctionWorksIfTheSlangExistsInTheDictionary()
     {
-        $this->wordEngine->update('bromance', 'This is the updated description for the slang.', 'description');
-        $this->wordEngine->update('bromance', 'This is the updated sample_sentence for the slang.', 'sample_sentence');
-        $this->assertEquals('This is the updated description for the slang.', $this->wordEngine->main['bromance']['description']);
-        $this->assertEquals('This is the updated sample_sentence for the slang.', $this->wordEngine->main['bromance']['sample_sentence']);
+        $updates = array(
+                    ['bromance', 'This is the updated description for the slang.', 'description' ],
+                    ['bromance', 'This is the updated sample_sentence for the slang.', 'sample_sentence'],
+            );
+        foreach ($updates as $update) {
+            $this->wordEngine->update($update[0], $update[1], $update[2]);
+            $this->assertEquals($update[1], $this->wordEngine->main[$update[0]][$update[2]]);
+        }
     }
 
     /**
@@ -111,19 +115,25 @@ class WordEngineTest extends \PHPUnit_Framework_TestCase
         $this->wordEngine->retrieve('bromance', 'usage');
     }
 
-
-
-    public function testRetrieveFunctionWorksIfSlangExistsInTheDictionary()
+    public function testRetrieveFunctionWorksWhenOnlySlangIsProvidedUsingDescriptionAsProperty()
     {
         $descriptiona = $this->wordEngine->retrieve("bromance");
         $this->assertEquals("This is the romance that exists between two men.", $descriptiona);
-        $descriptionb = $this->wordEngine->retrieve("bromance", "description");
-        $this->assertEquals("This is the romance that exists between two men.", $descriptionb);
-        $sample_sentencea = $this->wordEngine->retrieve("bromance", "sample_sentence");
-        $this->assertEquals("", $sample_sentencea);
+    }
+
+
+    public function testRetrieveFunctionWorksIfSlangExistsInTheDictionaryAndPropertyIsProvidedAsSecondArgument()
+    {
         $this->wordEngine->add("sup", "This is another way of saying What's Up", "Hey Bro, Sup!!!");
-        $sample_sentenceb = $this->wordEngine->retrieve("sup", "sample_sentence");
-        $this->assertEquals("Hey Bro, Sup!!!", $sample_sentenceb);
+        $retrievals = array(
+                        ['This is the romance that exists between two men.', 'bromance', 'description'],
+                        ['', 'bromance', 'sample_sentence'],
+                        ['Hey Bro, Sup!!!', 'sup', 'sample_sentence'],
+            );
+        foreach ($retrievals as $retrieval) {
+            $this->assertEquals($retrieval[0], $this->wordEngine->retrieve($retrieval[1], $retrieval[2]));
+        }
+
     }
 
 

@@ -2,8 +2,6 @@
 
 namespace Elchroy\UrbanDictionary;
 
-use Elchroy\UrbanDictionary\Word;
-
 class Category extends WordEngine
 {
     public $main;
@@ -30,7 +28,7 @@ class Category extends WordEngine
     {
         $sentence = $this->removeNonAlphaNum($sentence);
         $words = explode(' ', $sentence); // Create an array of all words.
-        $counts = (array_map(function ($word) use ($words) {return $this->getCount($words, $word);}, $words)); // Create an array of number of occurences of each word.
+        $counts = (array_map(function ($word) use ($words) {return $this->getCount($words, $word); }, $words)); // Create an array of number of occurences of each word.
         return array_combine($words, $counts); // Combine the two arrays and return the combined array. $words as keys, $counts as values
     }
 
@@ -43,7 +41,8 @@ class Category extends WordEngine
     protected function getCount($words, $word)
     {
         $count = 0;
-        array_map(function($word2) use (&$word, &$count) {return $word2 == $word ? $count++ : $count ;}, $words);
+        array_map(function ($word2) use (&$word, &$count) {return $word2 == $word ? $count++ : $count; }, $words);
         return $count;
     }
+
 }
