@@ -1,21 +1,20 @@
 <?php
 
-       // This is mu first example of a php generator.
-       //
-       function num() {
-            for ($i = 1; $i <=10; ++$i) {
-                yield $i;
-                echo "This is the next number: $i.\n";
-            }
-       }
+require 'vendor/autoload.php';
 
-      // print_r(num());
+// use Elchroy\UrbanDictionary\Word;
+use Elchroy\UrbanDictionary\WordBook;
+// use Elchroy\Interfaces\BookInterface;
+// Use Elchroy\UrbanDictionary\Categorize;
+// include_once('src/WordBook.php');
 
-      foreach(num() as $v);
+$b = new WordBook;
 
+ $b->like('tight');
+ $b->like('tight');
+ $b->like('tight');
+ $b->unlike('tight');
+echo 'Numebr of likes is : ', $b->likes('tight');
+echo 'Numebr of unlikes is : ', $b->unlikes('tight');
 
-num();
-
-num();
-
-      // print_r(num());
+echo 'Rating is: ',$b->rating('tight');

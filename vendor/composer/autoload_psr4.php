@@ -16,4 +16,5 @@ return array(
     'Satooshi\\' => array($vendorDir . '/satooshi/php-coveralls/src/Satooshi'),
     'Elchroy\\UrbanDictionary\\' => array($baseDir . '/src'),
     'Elchroy\\Tests\\' => array($baseDir . '/tests'),
+    'Elchroy\\Interfaces\\' => array($baseDir . '/src/interfaces'),
 );

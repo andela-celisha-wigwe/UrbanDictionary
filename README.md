@@ -27,11 +27,11 @@ $slang->getStaticSentence(); // ==> Prosper has finished the curriculum, Tight.
 ```
 
 
-###**WordEngine**
+###**WordBook**
 This class is the 'dynamic' array that contains slangs. It is the dictionary. You can add to, update, retrieve, and delete from the dictionary.
-This class is in the 'src/WordEngine.php' file and in the `Elchroy\UrbanDictionary` namespace. The data structure of the dictionary is similar to that of the static associative array in the Word class. It is however dynamic.
+This class is in the 'src/WordBook.php' file and in the `Elchroy\UrbanDictionary` namespace. The data structure of the dictionary is similar to that of the static associative array in the Word class. It is however dynamic.
 ```
-$slang = new WordEngine(); // Create a new instance of the WordEngine Class
+$slang = new WordBook(); // Create a new instance of the WordBook Class
 $slang->add('Naa', "This is another way of saying 'No'.", 'Naa I do not think I will come home this weekend.');
 $slang->retrieve('Naa'); // ==> This is another way of saying 'No'.
 $slang->update('Naa', "This is the updated value of the sample_sentence of the slang 'Naa'.");
@@ -43,7 +43,7 @@ $slang->retrieve('Naa'); // This returns an error, since the slang 'Naa' has bee
 
 ###**Category**
 This class is responsible for pairing each word in a sentence with the number of occurences of the word in the sentence.
-This class is located in the 'src/Category.php' file and in the `Elchroy\UrbanDictionary` namespace. This class inherits from the WordEngine class.
+This class is located in the 'src/Category.php' file and in the `Elchroy\UrbanDictionary` namespace. This class inherits from the WordBook class.
 ```
 $sland = new Category();
 $slang->add('Naa', "This is another way of saying 'No'.", 'Naa I do not think so. I do DO not want to come there. NAA!');

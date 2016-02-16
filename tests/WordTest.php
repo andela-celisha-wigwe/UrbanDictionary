@@ -1,6 +1,5 @@
 <?php
-namespace Elchroy\Tests;
-use Elchroy\Tests;
+
 use Elchroy\UrbanDictionary\Word;
 
 class WordTest extends \PHPUnit_Framework_TestCase

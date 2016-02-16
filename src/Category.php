@@ -1,14 +1,20 @@
 <?php
 
+/**
+ * @author Elisha-Wigwe CHijioke O. <chijioke.elisha-wigwe@andela.com>
+ * @copyright 2016 Elisha-Wigwe Chijioke O.
+ */
+
 namespace Elchroy\UrbanDictionary;
 
 /**
- * The categrry class - Inherits some funcitons form the WordEngine class.
+ * The categrry class - Inherits some funcitons form the WordBook class.
  */
-class Category extends WordEngine
+class Category extends WordBook
 {
     /**
      * [categorize description] - This returns an associative array of words as keys and counts (number of occurences) as values. This action is case-sensitive. Thus 'This' is different from 'THIS' and 'this'. This method calls on the group method to categorize the sentence input
+     *
      * @param  string $slang - this is the slang to be wworked on. It is the key of the associative array
      * @param  string $property - This is the property to be used to categorize. It defaults to sample_sentence but can be the 'description'.s
      * @return array - the return value is an associative array of slangs with descriptions and sample usage sentence..
@@ -22,7 +28,8 @@ class Category extends WordEngine
     /**
      * [categorize_i description] - this is simiar to the categorize function except that it is case -insensitive.
      * Thus 'THis', 'this' and 'THIS' are considered the same. The function first converts all characters to lovercsase using strtolower(). This method calls on the group method to categorize the sentence input
-     * @param  string $slang - This is the urban word to be worked in. It acts as one of thekeys of the associative array.
+     *
+     * @param  string $slang - This is the urban word to be worked on. It acts as one of the keys of the associative array.
      * @param  string $property - This is the property to be used to categorize. It defaults to sample_sentence but can be the 'description'
      * @return array - The return value is an associative array of slangs with descriptions and sample usage sentence. All keys in this array are lowercase.
      */
