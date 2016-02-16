@@ -106,14 +106,14 @@ class WordBook
         return reset($this->main);
     }
 
-    public function selectAll($string)
-    {
-        //get eh length og the string. and chhose only those words that start with the letters given in the argument.
-        $result = (array_filter(array_keys($this->main), function($slang) use ($string) {return $slang !== $string;}));
-        $result = array_map(function ($key) {return $this->main[$key];} , $result);
-        return $result;
-        // return array_filter($this->main, function($slang) use ($string) {$slang == $string;});
-    }
+    // public function selectAll($string)
+    // {
+    //     //get eh length og the string. and chhose only those words that start with the letters given in the argument.
+    //     $result = (array_filter(array_keys($this->main), function($slang) use ($string) {return $slang !== $string;}));
+    //     $result = array_map(function ($key) {return $this->main[$key];} , $result);
+    //     return $result;
+    //     // return array_filter($this->main, function($slang) use ($string) {$slang == $string;});
+    // }
 
     public function allSlangs()
     {
