@@ -343,4 +343,5 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $final = $this->wordBook->unlikes($slang);
         $this->assertEquals(-1, $final - $init);
     }
+
 }
