@@ -106,14 +106,32 @@ class WordBook
         return reset($this->main);
     }
 
-    // public function selectAll($string)
-    // {
-    //     //get eh length og the string. and chhose only those words that start with the letters given in the argument.
-    //     $result = (array_filter(array_keys($this->main), function($slang) use ($string) {return $slang !== $string;}));
-    //     $result = array_map(function ($key) {return $this->main[$key];} , $result);
-    //     return $result;
-    //     // return array_filter($this->main, function($slang) use ($string) {$slang == $string;});
-    // }
+    /**
+    * Select all slangs whose slangs are similar.
+    * @param  'string' $string The string to be used for the search.
+    * @return array The return value is the array of all words that start with the letter of the string.
+    */
+    public function starts_with($string)
+    {
+        $n = strlen($string);
+        $sels = array_filter($this->allSlangs(), function ($slang) use ($string, $n) { return $string == substr($slang, 0, $n); });
+        return $sels;
+        // return array_map(function ($sel) {return $this->$sel;}, $sels);
+    }
+
+    /**
+     * Selects all slang that end with the letters of the parameter string.
+     * @param  string $string The string to be used for the search.
+     * @return array The return value is teh arry of all words that end wtith the letters of the string.
+     */
+    public function ends_with($string)
+    {
+        $n = strlen($string);
+        $sels = array_filter($this->allSlangs(), function ($slang) use ($string, $n) { return $string == substr($slang, -$n, $n); });
+        return $sels;
+        // return array_map(function ($sel) { return $this->$sel;});
+
+    }
 
     public function allSlangs()
     {
@@ -138,18 +156,31 @@ class WordBook
     public function like($slang)
     {
         return ++$this->main[$slang]['likes'];
-       // return $this->main;
+    }
+
+
+    public function remove_Like($slang)
+    {
+        return --$this->main[$slang]['likes'];
     }
 
     public function unlike($slang)
     {
         return ++$this->main[$slang]['unlikes'];
-       // return $this->main;
+    }
+
+
+    public function removeUnlike($slang)
+    {
+        return --$this->main[$slang]['unlikes'];
     }
 
     public function rating($slang)
     {
-        return $this->likes($slang) - $this->unlikes($slang);
+        $total = $this->likes($slang) + $this->unlikes($slang);
+        $likes = $this->likes($slang);
+        $rating = (($likes / $total)*5);
+        return $rating;
     }
 
 
