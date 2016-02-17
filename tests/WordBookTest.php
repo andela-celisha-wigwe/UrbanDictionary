@@ -323,4 +323,24 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([3 => 'ghgzzp', 4 => 'zpaqtgzp'], $ends_with);
 
     }
+
+
+    public function testRemoveLkeFunctionWorks()
+    {
+        $slang = 'bromance';
+        $init = $this->wordBook->likes($slang);
+        $this->wordBook->removeLike($slang);
+        $final = $this->wordBook->likes($slang);
+        $this->assertEquals(-1, $final - $init);
+    }
+
+
+    public function testRemoveUnlikeFunctionWorks()
+    {
+        $slang = 'bromance';
+        $init = $this->wordBook->unlikes($slang);
+        $this->wordBook->removeUnlike($slang);
+        $final = $this->wordBook->unlikes($slang);
+        $this->assertEquals(-1, $final - $init);
+    }
 }

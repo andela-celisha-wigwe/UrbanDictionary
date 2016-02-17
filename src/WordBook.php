@@ -159,14 +159,15 @@ class WordBook
     }
 
 
-    public function remove_Like($slang)
-    {
-        return --$this->main[$slang]['likes'];
-    }
-
     public function unlike($slang)
     {
         return ++$this->main[$slang]['unlikes'];
+    }
+
+
+    public function removeLike($slang)
+    {
+        return --$this->main[$slang]['likes'];
     }
 
 
