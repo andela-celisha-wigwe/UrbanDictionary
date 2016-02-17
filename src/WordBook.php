@@ -56,6 +56,7 @@ class WordBook
 
     /**
      * The previous slang in the dictionary.
+     *
      * @return array The array of the previous slang in the dictionary
      */
     public function prev()
@@ -65,6 +66,7 @@ class WordBook
 
     /**
      * The next slang in the dictionary
+     *
      * @return array The array of the next slang in the dictionary
      */
     public function next()
@@ -74,6 +76,7 @@ class WordBook
 
     /**
      * The last slang inside the dictionary.
+     *
      * @return array The array containing the last slang in the dictionary.
      */
     public function last()
@@ -84,6 +87,7 @@ class WordBook
 
     /**
      * The current slang inside the dictionary
+     *
      * @return array The array containing the current element being focused on in the array.
      */
     public function current()
@@ -93,6 +97,7 @@ class WordBook
 
     /**
      * The first slang in the array
+     *
      * @return array The array contataining the first slang in the array.
      * This moves the pointer to the first slang int he dictionary
      */
@@ -103,6 +108,7 @@ class WordBook
 
     /**
     * Select all slangs whose slangs are similar.
+    *
     * @param  'string' $string The string to be used for the search.
     * @return array The return value is the array of all words that start with the letter of the string.
     */
@@ -116,6 +122,7 @@ class WordBook
 
     /**
      * Selects all slang that end with the letters of the parameter string.
+     *
      * @param  string $string The string to be used for the search.
      * @return array The return value is teh arry of all words that end wtith the letters of the string.
      */
@@ -130,6 +137,7 @@ class WordBook
 
     /**
      * An array of all the words in the dictionary.
+     *
      * @return array The return value is an array of all the slangs the words in the dictionary.
      */
     public function allSlangs()
@@ -139,81 +147,90 @@ class WordBook
 
     /**
      * Fetch the array of the slang beign requested for.
+     *
      * @param  string $slang The slang for which it is rrequired to find its details.
      * @return array The return value is the full array containing all the properties of the slang,
      * including the slang name, description, sample_sentence, likes and unlikes.
      */
     public function fetch($slang)
     {
-        return $this->main[$slang];
+        return $this->slang_exists($slang) ? $this->main[$slang] : $this->throwError("$slang is not found in the dictionary.");
     }
 
 
     /**
      * Gets the number of likes ot the slang that is given.
+     *
      * @param  string $slang The slang for which we need to get its number of likes.
      * @return integer  The integer value representing the number of likes of the slang in question.
      */
     public function likes($slang)
     {
-        return $this->main[$slang]['likes'];
+        return $this->slang_exists($slang) ? $this->main[$slang]['likes'] : $this->throwError("$slang is not found in the dictionary.");
     }
 
     /**
      * Gets the number of unlikes ot the slang that is given.
+     *
      * @param  string $slang The slang for which we need to get its number of unlikes.
      * @return integer  The integer value representing the number of unlikes of the slang in question.
      */
     public function unlikes($slang)
     {
-        return $this->main[$slang]['unlikes'];
+        return $this->slang_exists($slang) ? $this->main[$slang]['unlikes'] : $this->throwError("$slang is not found in the dictionary.");
     }
 
 
     /**
      * The action to like the slang.
+     *
      * @param  string $slang The slang to be liked.
      * @return interger    The return value is the number of likes after being incremented by 1.
      */
     public function like($slang)
     {
-        return ++$this->main[$slang]['likes'];
+        return $this->slang_exists($slang) ? ++$this->main[$slang]['likes'] : $this->throwError("$slang is not found in the dictionary.");
     }
 
     /**
      * The action to unlike a slang.
+     *
      * @param  string $slang The slang to be unliked.
      * @return integer       The number of unlikes if the slang after being incremented by 1.
      */
     public function unlike($slang)
     {
+        return $this->slang_exists($slang) ? ++$this->main[$slang]['unlikes'] : $this->throwError("$slang is not found in the dictionary.");
         return ++$this->main[$slang]['unlikes'];
     }
 
     /**
      * the action to remove a 'like' from a slang.
+     *
      * @param  string $slang This is the slang tfor which it required to reduce it numebr of likes.
      * @return integer        The number of likes of the slang in question, after being decremented by 1.
      */
     public function removeLike($slang)
     {
-        return --$this->main[$slang]['likes'];
+        return $this->slang_exists($slang) ? --$this->main[$slang]['likes'] : $this->throwError("$slang is not found in the dictionary.");
     }
 
 
     /**
      * The action to remove an 'unlike' from a slang.
+     *
      * @param  string $slang The slang for which it is required to rduce uts number of unlikes.
      * @return integer        The number of unlikes of the slang in question, after being decremented by 1.
      */
     public function removeUnlike($slang)
     {
-        return --$this->main[$slang]['unlikes'];
+        return $this->slang_exists($slang) ? --$this->main[$slang]['unlikes'] : $this->throwError("$slang is not found in the dictionary.");
     }
 
 
     /**
      * The action to view the rating of a slang. This action word with like() and unlike().
+     *
      * @param  string $slang The slang for which its rating is required.
      * @return integer        The rating value in percentage and float. highes rating is 100%.
      */

@@ -344,4 +344,70 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(-1, $final - $init);
     }
 
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzzz is not found in the dictionary.
+     */
+    public function testFetchFunctionReturnsThrowsExceptionIFSlangIsNotInTHeDictionary()
+    {
+        $this->wordBook->fetch('zzzzz');
+    }
+
+
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzzz is not found in the dictionary.
+     */
+    public function testLikesFunctionReturnsThrowsExceptionIFSlangIsNotInTHeDictionary()
+    {
+        $this->wordBook->likes('zzzzz');
+    }
+
+
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzzz is not found in the dictionary.
+     */
+    public function testUnLikesFunctionReturnsThrowsExceptionIFSlangIsNotInTHeDictionary()
+    {
+        $this->wordBook->unlikes('zzzzz');
+    }
+
+
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzzz is not found in the dictionary.
+     */
+    public function testLikeFunctionReturnsThrowsExceptionIFSlangIsNotInTHeDictionary()
+    {
+        $this->wordBook->like('zzzzz');
+    }
+
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzzz is not found in the dictionary.
+     */
+    public function testUnlikeFunctionReturnsThrowsExceptionIFSlangIsNotInTHeDictionary()
+    {
+        $this->wordBook->unlike('zzzzz');
+    }
+
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzzz is not found in the dictionary.
+     */
+    public function testRemoveLikeFunctionReturnsThrowsExceptionIFSlangIsNotInTHeDictionary()
+    {
+        $this->wordBook->removeLike('zzzzz');
+    }
+
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzzz is not found in the dictionary.
+     */
+    public function testRemoveUnlikeFunctionReturnsThrowsExceptionIFSlangIsNotInTHeDictionary()
+    {
+        $this->wordBook->removeUnlike('zzzzz');
+    }
+
 }
