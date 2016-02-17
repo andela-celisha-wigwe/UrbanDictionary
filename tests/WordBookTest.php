@@ -310,7 +310,7 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->add('ghgzzp', 'This is another random word that ends with zp');
         $this->wordBook->add('zpaqtgzp', 'This is another random word that starts and ends with zp');
         $starts_with = $this->wordBook->starts_with('zp');
-        $this->assertEquals([2 => 'zptitip', 4 => 'zpaqtgzp'], $starts_with);
+        $this->assertEquals(['zptitip', 'zpaqtgzp'], $starts_with);
 
     }
 
@@ -320,7 +320,7 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->add('ghgzzp', 'This is another random word that ends with zp');
         $this->wordBook->add('zpaqtgzp', 'This is another random word that starts and ends with zp');
         $ends_with = $this->wordBook->ends_with('zp');
-        $this->assertEquals([3 => 'ghgzzp', 4 => 'zpaqtgzp'], $ends_with);
+        $this->assertEquals(['ghgzzp', 'zpaqtgzp'], $ends_with);
 
     }
 

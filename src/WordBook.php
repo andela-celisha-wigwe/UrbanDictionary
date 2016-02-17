@@ -20,12 +20,6 @@ class WordBook
     public $main;
 
     /**
-     * The public variable for the selections
-     * @var array.
-     */
-    public $selections;
-
-    /**
      * $properties The array of all properties of slangs inside the dicntionary. This is a private variable
      *
      * @var array
@@ -51,6 +45,7 @@ class WordBook
 
     /**
      * [__get description]
+     *
      * @param  string $slang The slang to be 'gotten' from the array.
      * @return [type] The array of the slang that was called. This is a simple use of the magic method.
      */
@@ -115,7 +110,7 @@ class WordBook
     {
         $n = strlen($string);
         $sels = array_filter($this->allSlangs(), function ($slang) use ($string, $n) { return $string == substr($slang, 0, $n); });
-        return $sels;
+        return array_values($sels);
         // return array_map(function ($sel) {return $this->$sel;}, $sels);
     }
 
@@ -128,63 +123,107 @@ class WordBook
     {
         $n = strlen($string);
         $sels = array_filter($this->allSlangs(), function ($slang) use ($string, $n) { return $string == substr($slang, -$n, $n); });
-        return $sels;
+        return array_values($sels);
         // return array_map(function ($sel) { return $this->$sel;});
 
     }
 
+    /**
+     * An array of all the words in the dictionary.
+     * @return array The return value is an array of all the slangs the words in the dictionary.
+     */
     public function allSlangs()
     {
         return array_keys($this->main);
     }
 
+    /**
+     * Fetch the array of the slang beign requested for.
+     * @param  string $slang The slang for which it is rrequired to find its details.
+     * @return array The return value is the full array containing all the properties of the slang,
+     * including the slang name, description, sample_sentence, likes and unlikes.
+     */
     public function fetch($slang)
     {
         return $this->main[$slang];
     }
 
+
+    /**
+     * Gets the number of likes ot the slang that is given.
+     * @param  string $slang The slang for which we need to get its number of likes.
+     * @return integer  The integer value representing the number of likes of the slang in question.
+     */
     public function likes($slang)
     {
         return $this->main[$slang]['likes'];
     }
 
+    /**
+     * Gets the number of unlikes ot the slang that is given.
+     * @param  string $slang The slang for which we need to get its number of unlikes.
+     * @return integer  The integer value representing the number of unlikes of the slang in question.
+     */
     public function unlikes($slang)
     {
         return $this->main[$slang]['unlikes'];
     }
 
+
+    /**
+     * The action to like the slang.
+     * @param  string $slang The slang to be liked.
+     * @return interger    The return value is the number of likes after being incremented by 1.
+     */
     public function like($slang)
     {
         return ++$this->main[$slang]['likes'];
     }
 
-
+    /**
+     * The action to unlike a slang.
+     * @param  string $slang The slang to be unliked.
+     * @return integer       The number of unlikes if the slang after being incremented by 1.
+     */
     public function unlike($slang)
     {
         return ++$this->main[$slang]['unlikes'];
     }
 
-
+    /**
+     * the action to remove a 'like' from a slang.
+     * @param  string $slang This is the slang tfor which it required to reduce it numebr of likes.
+     * @return integer        The number of likes of the slang in question, after being decremented by 1.
+     */
     public function removeLike($slang)
     {
         return --$this->main[$slang]['likes'];
     }
 
 
+    /**
+     * The action to remove an 'unlike' from a slang.
+     * @param  string $slang The slang for which it is required to rduce uts number of unlikes.
+     * @return integer        The number of unlikes of the slang in question, after being decremented by 1.
+     */
     public function removeUnlike($slang)
     {
         return --$this->main[$slang]['unlikes'];
     }
 
+
+    /**
+     * The action to view the rating of a slang. This action word with like() and unlike().
+     * @param  string $slang The slang for which its rating is required.
+     * @return integer        The rating value in percentage and float. highes rating is 100%.
+     */
     public function rating($slang)
     {
         $total = $this->likes($slang) + $this->unlikes($slang);
         $likes = $this->likes($slang);
-        $rating = (($likes / $total)*5);
+        $rating = (($likes / $total)*100);
         return $rating;
     }
-
-
 
 
     /**
