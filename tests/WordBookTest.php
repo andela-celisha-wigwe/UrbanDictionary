@@ -117,10 +117,10 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
 
     public function testAddFunctionIncreasesTheNumberOfWordsInTheDictionary()
     {
-        $initial_count = count($this->wordBook->main);
+        $initialCount = count($this->wordBook->main);
         $this->addToMain();
-        $final_count = count($this->wordBook->main);
-        $this->assertEquals(2, ($final_count - $initial_count));
+        $finalCount = count($this->wordBook->main);
+        $this->assertEquals(2, ($finalCount - $initialCount));
     }
 
     public function testAddFunctionAddsANewWordToTheDictionary()
@@ -146,10 +146,10 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteFunctionWorks()
     {
-        $initial_count = count($this->wordBook->main);
+        $initialCount = count($this->wordBook->main);
         $this->wordBook->delete('bromance');
-        $final_count = count($this->wordBook->main);
-        $this->assertEquals(-1, ($final_count - $initial_count));
+        $finalCount = count($this->wordBook->main);
+        $this->assertEquals(-1, ($finalCount - $initialCount));
         $this->assertNotContains('bromance', array_keys($this->wordBook->main));
     }
 
@@ -236,14 +236,14 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
 
     public function testsSlangExistsFunctionReturnTrueIfSlangParameterIsInTheDictionary()
     {
-        $slang_exists = $this->wordBook->slang_exists('bromance');
-        $this->assertTrue(true, $slang_exists);
+        $slangExists = $this->wordBook->slangExists('bromance');
+        $this->assertTrue(true, $slangExists);
     }
 
     public function testsSlangExistsFunctionReturnFalseIfSlangParameterIsNotInTheDictionary()
     {
-        $slang_exists = $this->wordBook->slang_exists('nonExistingWord');
-        $this->assertNotTrue(false, $slang_exists);
+        $slangExists = $this->wordBook->slangExists('nonExistingWord');
+        $this->assertNotTrue(false, $slangExists);
     }
 
      public function testFetchfunctionWorks()
@@ -309,8 +309,8 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->add('zptitip', 'This is another random word that starts with zp');
         $this->wordBook->add('ghgzzp', 'This is another random word that ends with zp');
         $this->wordBook->add('zpaqtgzp', 'This is another random word that starts and ends with zp');
-        $starts_with = $this->wordBook->starts_with('zp');
-        $this->assertEquals(['zptitip', 'zpaqtgzp'], $starts_with);
+        $startsWith = $this->wordBook->startsWith('zp');
+        $this->assertEquals(['zptitip', 'zpaqtgzp'], $startsWith);
 
     }
 
@@ -319,8 +319,8 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->add('zptitip', 'This is another random word that starts with zp');
         $this->wordBook->add('ghgzzp', 'This is another random word that ends with zp');
         $this->wordBook->add('zpaqtgzp', 'This is another random word that starts and ends with zp');
-        $ends_with = $this->wordBook->ends_with('zp');
-        $this->assertEquals(['ghgzzp', 'zpaqtgzp'], $ends_with);
+        $endsWith = $this->wordBook->endsWith('zp');
+        $this->assertEquals(['ghgzzp', 'zpaqtgzp'], $endsWith);
 
     }
 
@@ -415,12 +415,12 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
      * @expectedExceptionMessage zzzz is not found in the dictionary.
      */
     public function testThrowExcpIfNoSlangThrowsException(){
-        $this->wordBook->throw_excp_if_no_slang('zzzz');
+        $this->wordBook->throwExcpIfNoSlang('zzzz');
     }
 
     public function testThrowExcpIfNoSlangReturnNothingIfTrue()
     {
-        $result = $this->wordBook->throw_excp_if_no_slang('tight');
+        $result = $this->wordBook->throwExcpIfNoSlang('tight');
         $this->assertEquals('', $result);
     }
 }

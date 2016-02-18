@@ -39,7 +39,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $this->cat->add('Tinz', "This is another way of saying 'things'.", 'This this Is is the THIS And and Things things THINGS ');
         // $expected = array("this" => 3, "is" => 2, "the" => 1, "and" => 2, "things" => 3);
         $expected = ['this' => 3, 'is' => 2, 'the' => 1, 'and' => 2, 'things' => 3];
-        $categories = $this->cat->categorize_i('Tinz');
+        $categories = $this->cat->categorizeI('Tinz');
         $this->assertEquals($expected, $categories);
     }
 

@@ -33,7 +33,7 @@ class Category extends WordBook
      * @param  string $property - This is the property to be used to categorize. It defaults to sample_sentence but can be the 'description'
      * @return array - The return value is an associative array of slangs with descriptions and sample usage sentence. All keys in this array are lowercase.
      */
-    public function categorize_i($slang, $property = 'sample_sentence')
+    public function categorizeI($slang, $property = 'sample_sentence')
     {
         $sentence = $this->retrieve($slang, $property);
         $sentence = strtolower($sentence);
@@ -43,6 +43,7 @@ class Category extends WordBook
 
     /**
      * [group This method is the called by both categorize and categorize_i. It is the function that does the main categorization before passing it results to the dependent methods.
+     *
      * @param  string $sentence the sentence to categorize. This defaults to the value of the sample_sentence key but can be set as the value of the description key.
      * @return array - this is the reti=urn value after combination of the $words array with the $couns array.
      */
@@ -57,6 +58,7 @@ class Category extends WordBook
 
     /**
      * [removeNonAlphaNum - This is a protected function. It removes all non-alphanumeric characters from a string. Only letters, numbers, and spaces within the sentence(string) can be sllowed.)
+     *
      * @param  string - the string with all unwanted charaters and end white spaces.
      * @return string - the sentence with all unwanted charaters removed. Any leading or trailing white spaces are also remived.
      */
