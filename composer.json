@@ -12,8 +12,7 @@
     "autoload" : {
         "psr-4": {
             "Elchroy\\UrbanDictionary\\" : "src",
-            "Elchroy\\Tests\\" : "tests",
-            "Elchroy\\Interfaces\\" : "src/interfaces"
+            "Elchroy\\Tests\\" : "tests"
         }
     },
 

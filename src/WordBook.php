@@ -2,11 +2,8 @@
 
 namespace Elchroy\UrbanDictionary;
 
-use Elchroy\Interfaces\BookInterface;
-// require_once('interfaces/BookInterface.php');
-
 /**
- * The WordBook. Has an associative arrayof words thus the urban dictionary.
+ * The WordBook. Has an associative array of words thus the urban dictionary.
  * It can add slangs to this array, retrieve infomation from the dicitonary.
  * It can also update certain properties of word in the array and can delete slang from the array.
  */
@@ -24,7 +21,7 @@ class WordBook
      *
      * @var array
      */
-    private static $properties = ['slang', 'description', 'sample_sentence'];
+    private static $properties = ['slang', 'description', 'sample_sentence', 'likes', 'unlikes'];
 
     /**
      * __construct Assigns some randome data inside the public main array.
@@ -154,7 +151,8 @@ class WordBook
      */
     public function fetch($slang)
     {
-        return $this->slang_exists($slang) ? $this->main[$slang] : $this->throwError("$slang is not found in the dictionary.");
+        $this->dictionary_check($slang);
+        return $this->main[$slang];
     }
 
 
@@ -166,7 +164,8 @@ class WordBook
      */
     public function likes($slang)
     {
-        return $this->slang_exists($slang) ? $this->main[$slang]['likes'] : $this->throwError("$slang is not found in the dictionary.");
+        $this->dictionary_check($slang);
+        return $this->main[$slang]['likes'];
     }
 
     /**
@@ -177,7 +176,8 @@ class WordBook
      */
     public function unlikes($slang)
     {
-        return $this->slang_exists($slang) ? $this->main[$slang]['unlikes'] : $this->throwError("$slang is not found in the dictionary.");
+        $this->dictionary_check($slang);
+        return $this->main[$slang]['unlikes'];
     }
 
 
@@ -189,7 +189,8 @@ class WordBook
      */
     public function like($slang)
     {
-        return $this->slang_exists($slang) ? ++$this->main[$slang]['likes'] : $this->throwError("$slang is not found in the dictionary.");
+        $this->dictionary_check($slang);
+        return ++$this->main[$slang]['likes'];
     }
 
     /**
@@ -200,7 +201,7 @@ class WordBook
      */
     public function unlike($slang)
     {
-        return $this->slang_exists($slang) ? ++$this->main[$slang]['unlikes'] : $this->throwError("$slang is not found in the dictionary.");
+        $this->dictionary_check($slang);
         return ++$this->main[$slang]['unlikes'];
     }
 
@@ -212,7 +213,8 @@ class WordBook
      */
     public function removeLike($slang)
     {
-        return $this->slang_exists($slang) ? --$this->main[$slang]['likes'] : $this->throwError("$slang is not found in the dictionary.");
+        $this->dictionary_check($slang);
+        return --$this->main[$slang]['likes'];
     }
 
 
@@ -224,7 +226,8 @@ class WordBook
      */
     public function removeUnlike($slang)
     {
-        return $this->slang_exists($slang) ? --$this->main[$slang]['unlikes'] : $this->throwError("$slang is not found in the dictionary.");
+        $this->dictionary_check($slang);
+        return --$this->main[$slang]['unlikes'];
     }
 
 
@@ -335,8 +338,13 @@ class WordBook
     public function slang_exists($slang)
     {
         // Return true if the given slang exists in the dictionary. Otherwise, return false.
-        // return array_key_exists($slang, $this->main);
         return in_array($slang, $this->allSlangs());
+    }
+
+
+    public function dictionary_check($slang)
+    {
+        return $this->slang_exists($slang) ? : $this->throwError("$slang is not found in the dictionary.");
     }
 
     /**
