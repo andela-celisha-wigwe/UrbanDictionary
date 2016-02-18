@@ -410,4 +410,17 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->removeUnlike('zzzzz');
     }
 
+    /**
+     * @expectedException Elchroy\UrbanDictionary\WordException
+     * @expectedExceptionMessage zzzz is not found in the dictionary.
+     */
+    public function testThrowExcpIfNoSlangThrowsException(){
+        $this->wordBook->throw_excp_if_no_slang('zzzz');
+    }
+
+    public function testThrowExcpIfNoSlangReturnNothingIfTrue()
+    {
+        $result = $this->wordBook->throw_excp_if_no_slang('tight');
+        $this->assertEquals('', $result);
+    }
 }

@@ -151,7 +151,7 @@ class WordBook
      */
     public function fetch($slang)
     {
-        $this->dictionary_check($slang);
+        $this->throw_excp_if_no_slang($slang);
         return $this->main[$slang];
     }
 
@@ -164,7 +164,7 @@ class WordBook
      */
     public function likes($slang)
     {
-        $this->dictionary_check($slang);
+        $this->throw_excp_if_no_slang($slang);
         return $this->main[$slang]['likes'];
     }
 
@@ -176,7 +176,7 @@ class WordBook
      */
     public function unlikes($slang)
     {
-        $this->dictionary_check($slang);
+        $this->throw_excp_if_no_slang($slang);
         return $this->main[$slang]['unlikes'];
     }
 
@@ -189,7 +189,7 @@ class WordBook
      */
     public function like($slang)
     {
-        $this->dictionary_check($slang);
+        $this->throw_excp_if_no_slang($slang);
         return ++$this->main[$slang]['likes'];
     }
 
@@ -201,7 +201,7 @@ class WordBook
      */
     public function unlike($slang)
     {
-        $this->dictionary_check($slang);
+        $this->throw_excp_if_no_slang($slang);
         return ++$this->main[$slang]['unlikes'];
     }
 
@@ -213,7 +213,7 @@ class WordBook
      */
     public function removeLike($slang)
     {
-        $this->dictionary_check($slang);
+        $this->throw_excp_if_no_slang($slang);
         return --$this->main[$slang]['likes'];
     }
 
@@ -226,7 +226,7 @@ class WordBook
      */
     public function removeUnlike($slang)
     {
-        $this->dictionary_check($slang);
+        $this->throw_excp_if_no_slang($slang);
         return --$this->main[$slang]['unlikes'];
     }
 
@@ -342,9 +342,14 @@ class WordBook
     }
 
 
-    public function dictionary_check($slang)
+    /**
+     * This function throws an exception if the $slang does not exist in the dictionary.
+     * @param  string $slang This is the slang to be chcked in the dictionary.
+     * @return It throws an exception if slang_exists function return false, but throws nothing (or null) otherwise.
+     */
+    public function throw_excp_if_no_slang($slang)
     {
-        return $this->slang_exists($slang) ? : $this->throwError("$slang is not found in the dictionary.");
+        $this->slang_exists($slang) ? : $this->throwError("$slang is not found in the dictionary.");
     }
 
     /**
