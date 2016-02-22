@@ -1,6 +1,6 @@
 # **UrbanDictionary**
 ##*Check Point 1A*
-[![Coverage Status](https://coveralls.io/repos/github/andela-celisha-wigwe/UrbanDictionary/badge.svg?branch=development)](https://coveralls.io/github/andela-celisha-wigwe/UrbanDictionary?branch=development)
+[![Coverage Status](ht,khjgkhtps://coveralls.io/repos/github/andela-celisha-wigwe/UrbanDictionary/badge.svg?branch=development)](https://coveralls.io/github/andela-celisha-wigwe/UrbanDictionary?branch=development)
 [![Build Status](https://travis-ci.org/andela-celisha-wigwe/UrbanDictionary.svg?branch=development)](https://travis-ci.org/andela-celisha-wigwe/UrbanDictionary)
 [![Circle CI](https://circleci.com/gh/andela-celisha-wigwe/UrbanDictionary/tree/development.svg?style=svg)](https://circleci.com/gh/andela-celisha-wigwe/UrbanDictionary/tree/development)
 
@@ -8,12 +8,12 @@
 
 This package is a Urban Dictionary built with PHP. It contains slangs (urban words), with some descriptions of those words and some sample sentences showing how to use such slangs.
 
-##**INSTALLATION**
+##**Installation**
 This package requires both [PHP 5.5+](http://php.net/) and [Composer](https://getcomposer.org/)
 
 `$ composer require Elchroy/UrbanDictionary`
 
-##**USAGE**
+##**Usage**
 
 
 ###**Word**

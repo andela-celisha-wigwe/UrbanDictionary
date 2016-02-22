@@ -63,7 +63,9 @@ class WordBook
     public function add($slang, $description, $sample_sentence = '')
     {
         // Throw an error if the slang already exists inside the dictionary.
-        if ($this->slangExists($slang)) { $this->throwError("'$slang' already exists in the dictionary."); }
+        if ($this->slangExists($slang)) {
+            $this->throwError("'$slang' already exists in the dictionary.");
+        }
         $this->main[$slang] = [
             'slang'             => $slang,
             'description'       => $description,
@@ -87,9 +89,13 @@ class WordBook
     public function retrieve($slang, $property = 'description')
     {
         // Throw an error is the slang to be retrieved is not found in the dictionary
-        if (!($this->slangExists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
+        if (!($this->slangExists($slang))) {
+            $this->throwError("'$slang' cannot be found in the dictionary.");
+        }
         // Throw an error is the property to be retireved is not listed as one of the properties of the words in the dictionary
-        if (!(in_array($property, self::$properties))) {$this->throwError("No defined property - '$property'");}
+        if (!(in_array($property, self::$properties))) {
+            $this->throwError("No defined property - '$property'");
+        }
         //If everything is OK, return the value of the property that was asked for.
         return $this->main[$slang][$property];
     }
@@ -109,11 +115,17 @@ class WordBook
     public function update($slang, $value = '', $property = 'description')
     {
         // Throw an error if the number of arguments passed to thge function is less than 2.
-        if (func_num_args() < 2) { $this->throwError('Wrong number of arguments: Please specify updated value.'); }
+        if (func_num_args() < 2) {
+            $this->throwError('Wrong number of arguments: Please specify updated value.');
+        }
         // Throw an error if the slang the first argument given to the function does not exist in the dictionary
-        if (!($this->slangExists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
+        if (!($this->slangExists($slang))) {
+            $this->throwError("'$slang' cannot be found in the dictionary.");
+        }
         // Throw an error is the property to be updated is not among the defined properties of the words in the dictionary.
-        if (!(in_array($property, self::$properties))) { $this->throwError("No defined property - '$property'"); }
+        if (!(in_array($property, self::$properties))) {
+            $this->throwError("No defined property - '$property'");
+        }
         // If everything is OK, return the main array (the dicitonary array) with the updated information.
         $this->main[$slang][$property] = $value;
         return $this->main;
@@ -128,7 +140,9 @@ class WordBook
     public function delete($slang)
     {
         // Throw an error if the slang to be deleted is not found in the dictionary.
-        if (!($this->slangExists($slang))) { $this->throwError("'$slang' cannot be found in the dictionary."); }
+        if (!($this->slangExists($slang))) {
+            $this->throwError("'$slang' cannot be found in the dictionary.");
+        }
         // If everything is OK, delete(unset) the slang from the main array (that contains the diciotnary words)
         unset($this->main[$slang]);
         return $this->main;
