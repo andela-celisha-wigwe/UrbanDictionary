@@ -1,26 +1,26 @@
 {
     "name" : "elchroy/urbandictionary",
+    "type": "library",
+    "homepage": "https://github.com/andela-celisha-wigwe/UrbanDictionary.git",
+    "keywords": ["urban","dictionary"],
     "description" : "This is an Urban Dictionary. It contains slangs, their descriptions and some sample sentences showing simple usage of the slang",
     "license" : "MIT",
     "authors" : [
                     {
                         "name" : "andela-celisha-wigwe",
-                        "email" : "chijioke.elisha-wigwe@andela.com"
+                        "email" : "chijioke.elisha-wigwe@andela.com",
+                        "role" : "Developer"
                     }
                 ],
-
     "autoload" : {
         "psr-4": {
             "Elchroy\\UrbanDictionary\\" : "src",
             "Elchroy\\Tests\\" : "tests"
         }
     },
-    "minimum-stability": "dev",
-    
     "require" : {
         "php" : ">=5.5"
     },
-
     "require-dev" : {
         "satooshi/php-coveralls" : "^1.0"
     }
