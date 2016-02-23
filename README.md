@@ -3,6 +3,7 @@
 [![Coverage Status](ht,khjgkhtps://coveralls.io/repos/github/andela-celisha-wigwe/UrbanDictionary/badge.svg?branch=development)](https://coveralls.io/github/andela-celisha-wigwe/UrbanDictionary?branch=development)
 [![Build Status](https://travis-ci.org/andela-celisha-wigwe/UrbanDictionary.svg?branch=development)](https://travis-ci.org/andela-celisha-wigwe/UrbanDictionary)
 [![Circle CI](https://circleci.com/gh/andela-celisha-wigwe/UrbanDictionary/tree/development.svg?style=svg)](https://circleci.com/gh/andela-celisha-wigwe/UrbanDictionary/tree/development)
+[![StyleCI](https://styleci.io/repos/51375312/shield)](https://styleci.io/repos/51375312)
 
 ## **Urban Dictionary Agnostic PHP Package**
 
@@ -64,7 +65,7 @@ $sland = new Category();
 $wordBook->add('Naa', "This is another way of saying 'No'.", 'Naa I do not think so. I do DO not want to come there. NAA!');
 $wordBook->categorize('Naa');  // This is the case-sensitive function.
 // ==> ['Naa' => 1, 'I' => 2, 'do' => 2, 'not' => 2, 'think' => 1, 'so' => 1, 'DO' => 1, 'want' => 1, 'to' => 1, 'come' => 1, 'there' => 1, 'NAA' => 1]
-$wordBook->categorize_i('Naa'); // This is the case-insensitive function
+$wordBook->categorizeI('Naa'); // This is the case-insensitive function
 // ==> ['Naa' => 2, 'I' => 2, 'do' => 3, 'not' => 2, 'think' => 1, 'so' => 1, 'want' => 1, 'to' => 1, 'come' => 1, 'there' => 1]
 ```
 
