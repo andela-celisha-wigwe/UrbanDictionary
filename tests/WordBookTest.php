@@ -1,8 +1,9 @@
 <?php
+
 namespace Elchroy\Tests;
+
 use Elchroy\UrbanDictionary\Word;
 use Elchroy\UrbanDictionary\WordBook;
-use Elchroy\UrbanDictionary\WordException;
 
 class WordBookTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,16 +41,15 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
     public function testFirstFunctionWorks()
     {
         $first = $this->wordBook->first();
-        $expected = array(
+        $expected = [
                             'slang'             => 'tight',
                             'description'       => 'When someone performs an awesome task',
                             'sample_sentence'   => 'Prosper has finished the curriculum, Tight.',
                             'likes'             => 0,
                             'unlikes'           => 0,
-            );
+            ];
         $this->assertEquals($expected, $first);
     }
-
 
     public function testCurrentFunctionworksAfterNextIsCalled()
     {
@@ -57,7 +57,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $current = $this->wordBook->current();
         $this->assertEquals($this->data, $current);
     }
-
 
     public function testCurrentFunctionWorksAFterPrevIsCalled()
     {
@@ -69,16 +68,12 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->data, $current);
     }
 
-
     public function testNextFunctionWorks()
     {
         $this->addToMain();
         $next = $this->wordBook->next();
         $this->assertEquals($this->data, $next);
     }
-
-
-
 
     public function testPrevFunctionWorksWell()
     {
@@ -87,33 +82,29 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->next();
         $this->wordBook->next();
         $prev = $this->wordBook->prev();
-        $expected = array(
+        $expected = [
                     'slang'             => 'wetin',
                     'description'       => "Another way of saying 'What?'.",
                     'sample_sentence'   => '',
                     'likes'             => 0,
                     'unlikes'           => 0,
-            );
+            ];
         $this->assertEquals($expected, $prev);
-
     }
-
 
     public function testLastFunctionWorks()
     {
         $this->addToMain();
         $last = $this->wordBook->last();
-        $expected = array(
+        $expected = [
                             'slang'             => 'Eh-en',
                             'description'       => 'This has different meanings',
                             'sample_sentence'   => 'Eh-en, eh-en',
                             'likes'             => 0,
                             'unlikes'           => 0,
-            );
+            ];
         $this->assertEquals($expected, $last);
     }
-
-
 
     public function testAddFunctionIncreasesTheNumberOfWordsInTheDictionary()
     {
@@ -171,7 +162,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->update('bromance');
     }
 
-
     /**
      * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage No defined property - 'UnrecognizedProperty'
@@ -181,13 +171,12 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->update('bromance', 'this is the value to update', 'UnrecognizedProperty');
     }
 
-
     public function testUpdateFunctionWorksIfTheSlangExistsInTheDictionary()
     {
-        $updates = array(
-                    ['bromance', 'This is the updated description for the slang.', 'description' ],
+        $updates = [
+                    ['bromance', 'This is the updated description for the slang.', 'description'],
                     ['bromance', 'This is the updated sample_sentence for the slang.', 'sample_sentence'],
-            );
+            ];
         foreach ($updates as $update) {
             $this->wordBook->update($update[0], $update[1], $update[2]);
             $this->assertEquals($update[1], $this->wordBook->main[$update[0]][$update[2]]);
@@ -214,25 +203,22 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrieveFunctionWorksWhenOnlySlangIsProvidedUsingDescriptionAsProperty()
     {
-        $descriptiona = $this->wordBook->retrieve("bromance");
-        $this->assertEquals("This is the romance that exists between two men.", $descriptiona);
+        $descriptiona = $this->wordBook->retrieve('bromance');
+        $this->assertEquals('This is the romance that exists between two men.', $descriptiona);
     }
-
 
     public function testRetrieveFunctionWorksIfSlangExistsInTheDictionaryAndPropertyIsProvidedAsSecondArgument()
     {
-        $this->wordBook->add("sup", "This is another way of saying What's Up", "Hey Bro, Sup!!!");
-        $retrievals = array(
+        $this->wordBook->add('sup', "This is another way of saying What's Up", 'Hey Bro, Sup!!!');
+        $retrievals = [
                         ['This is the romance that exists between two men.', 'bromance', 'description'],
                         ['', 'bromance', 'sample_sentence'],
                         ['Hey Bro, Sup!!!', 'sup', 'sample_sentence'],
-            );
+            ];
         foreach ($retrievals as $retrieval) {
             $this->assertEquals($retrieval[0], $this->wordBook->retrieve($retrieval[1], $retrieval[2]));
         }
-
     }
-
 
     public function testsSlangExistsFunctionReturnTrueIfSlangParameterIsInTheDictionary()
     {
@@ -246,12 +232,11 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->assertNotTrue(false, $slangExists);
     }
 
-     public function testFetchfunctionWorks()
+    public function testFetchfunctionWorks()
     {
         $expected = $this->wordBook->fetch('bromance');
         $this->assertEquals($expected, $this->data);
     }
-
 
     public function testMagicMethodWorks()
     {
@@ -259,8 +244,7 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($slang, $this->data);
     }
 
-
-     public function testLikeFunction()
+    public function testLikeFunction()
     {
         $init = $this->wordBook->likes('bromance');
         $this->wordBook->like('bromance');
@@ -268,13 +252,11 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $final - $init);
     }
 
-
     public function testLikesFunction()
     {
         $likes = $this->wordBook->likes('bromance');
         $this->assertEquals(0, $likes);
     }
-
 
     public function testUnlikeFunction()
     {
@@ -283,8 +265,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $final = $this->wordBook->unlikes('bromance');
         $this->assertEquals(1, $final - $init);
     }
-
-
 
     public function testUnlikesFunction()
     {
@@ -303,7 +283,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         // $this->assertEquals(3, $rating);
     }
 
-
     public function testStartsWithFunctionWorks()
     {
         $this->wordBook->add('zptitip', 'This is another random word that starts with zp');
@@ -311,7 +290,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->add('zpaqtgzp', 'This is another random word that starts and ends with zp');
         $startsWith = $this->wordBook->startsWith('zp');
         $this->assertEquals(['zptitip', 'zpaqtgzp'], $startsWith);
-
     }
 
     public function testEndsWithFunctionWorks()
@@ -321,9 +299,7 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->add('zpaqtgzp', 'This is another random word that starts and ends with zp');
         $endsWith = $this->wordBook->endsWith('zp');
         $this->assertEquals(['ghgzzp', 'zpaqtgzp'], $endsWith);
-
     }
-
 
     public function testRemoveLkeFunctionWorks()
     {
@@ -333,7 +309,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $final = $this->wordBook->likes($slang);
         $this->assertEquals(-1, $final - $init);
     }
-
 
     public function testRemoveUnlikeFunctionWorks()
     {
@@ -353,7 +328,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->fetch('zzzzz');
     }
 
-
     /**
      * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage zzzzz is not found in the dictionary.
@@ -363,7 +337,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
         $this->wordBook->likes('zzzzz');
     }
 
-
     /**
      * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage zzzzz is not found in the dictionary.
@@ -372,7 +345,6 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
     {
         $this->wordBook->unlikes('zzzzz');
     }
-
 
     /**
      * @expectedException Elchroy\UrbanDictionary\WordException
@@ -414,7 +386,8 @@ class WordBookTest extends \PHPUnit_Framework_TestCase
      * @expectedException Elchroy\UrbanDictionary\WordException
      * @expectedExceptionMessage zzzz is not found in the dictionary.
      */
-    public function testThrowExcpIfNoSlangThrowsException(){
+    public function testThrowExcpIfNoSlangThrowsException()
+    {
         $this->wordBook->throwExcpIfNoSlang('zzzz');
     }
 

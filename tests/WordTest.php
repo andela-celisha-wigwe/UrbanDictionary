@@ -4,7 +4,6 @@ use Elchroy\UrbanDictionary\Word;
 
 class WordTest extends \PHPUnit_Framework_TestCase
 {
-
     public $word_class;
 
     public function setUp()
@@ -12,9 +11,9 @@ class WordTest extends \PHPUnit_Framework_TestCase
         $this->word_class = Word::$data;
     }
 
-    public function testWordClassHasAStaticVariable ()
+    public function testWordClassHasAStaticVariable()
     {
-        $this->assertArrayHasKey("tight", $this->word_class);
+        $this->assertArrayHasKey('tight', $this->word_class);
     }
 
     public function testGetStaticSlangFunctionReturnsStaticSlangName()
@@ -31,5 +30,4 @@ class WordTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('Prosper has finished the curriculum, Tight.', Word::getStaticSentence('tight'));
     }
-
 }

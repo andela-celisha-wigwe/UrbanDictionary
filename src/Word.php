@@ -2,7 +2,6 @@
 
 namespace Elchroy\UrbanDictionary;
 
-
 /**
  * This is the Word class.
  *
@@ -16,11 +15,12 @@ class Word
                             'slang'             => 'tight',
                             'description'       => 'When someone performs an awesome task',
                             'sample_sentence'   => 'Prosper has finished the curriculum, Tight.',
-                        ]
+                        ],
         ];
 
     /**
      * This static function returns the value of the 'slang' key in the public static variable self::$data.
+     *
      * @return string tight
      */
     public static function getStaticSlang()
@@ -30,6 +30,7 @@ class Word
 
     /**
      * This static function returns the value of the 'description' key of the public static variable self::$data above.
+     *
      * @return string When someone perform an awesome task
      */
     public static function getStaticDescription()
@@ -39,6 +40,7 @@ class Word
 
     /**
      * This static function returns the value of the 'sample_sentence'  key of the public static variable self::$data.
+     *
      * @return string Prosper has finished the curriculum, Tight.
      */
     public static function getStaticSentence()

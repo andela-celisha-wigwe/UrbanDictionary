@@ -7,6 +7,7 @@ use Elchroy\UrbanDictionary\Category;
 class CategoryTest extends \PHPUnit_Framework_TestCase
 {
     public $cat;
+
     public function setUp()
     {
         $this->cat = new Category();
@@ -22,13 +23,13 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     public function testCategorizeFunctionWorksForPlainText()
     {
         $expected = [
-                        "that"      => 1,
-                        "wahala"    => 3,
-                        "is"        => 2,
-                        "too"       => 3,
-                        "much"      => 2,
-                        "and"       => 1,
-                        "the"       => 1,
+                        'that'      => 1,
+                        'wahala'    => 3,
+                        'is'        => 2,
+                        'too'       => 3,
+                        'much'      => 2,
+                        'and'       => 1,
+                        'the'       => 1,
                     ];
         $categories = $this->cat->categorize('Wahala');
         $this->assertEquals($expected, $categories);
@@ -45,18 +46,17 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCategorizeFunctionWorksAndEliminatesNoisyCharacterFromSentence()
     {
-        $this->cat->add("Sup", "This means 'What up...?'.", "Hey,÷≥ ÷≥÷hey÷÷≥≤ªº§¶•, ¶§∞•¢sup Sup ª•§∞¢¶§SUP º•ª¶§∞sup");
-        $expected = array("Hey" => 1, "hey" => 1, "sup" => 2, "Sup" => 1, "SUP" => 1);
-        $categories = $this->cat->categorize("Sup");
+        $this->cat->add('Sup', "This means 'What up...?'.", 'Hey,÷≥ ÷≥÷hey÷÷≥≤ªº§¶•, ¶§∞•¢sup Sup ª•§∞¢¶§SUP º•ª¶§∞sup');
+        $expected = ['Hey' => 1, 'hey' => 1, 'sup' => 2, 'Sup' => 1, 'SUP' => 1];
+        $categories = $this->cat->categorize('Sup');
         $this->assertEquals($expected, $categories);
     }
 
-
     public function testCategorizeFunctionWorksForSentencesThatIncludeNumbers()
     {
-        $this->cat->add("Supa", "This means 'What up again...?'.", "Hey, hey, sup, Sup, SUP, sup, 1 1 1 1 ");
-        $expected = array("Hey" => 1, "hey" => 1, "sup" => 2, "Sup" => 1, "SUP" => 1, "1" => 4);
-        $categories = $this->cat->categorize("Supa");
+        $this->cat->add('Supa', "This means 'What up again...?'.", 'Hey, hey, sup, Sup, SUP, sup, 1 1 1 1 ');
+        $expected = ['Hey' => 1, 'hey' => 1, 'sup' => 2, 'Sup' => 1, 'SUP' => 1, '1' => 4];
+        $categories = $this->cat->categorize('Supa');
         $this->assertEquals($expected, $categories);
     }
 }

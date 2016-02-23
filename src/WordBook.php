@@ -17,7 +17,7 @@ class WordBook
     public $main;
 
     /**
-     * $properties The array of all properties of slangs inside the dicntionary. This is a private variable
+     * $properties The array of all properties of slangs inside the dicntionary. This is a private variable.
      *
      * @var array
      */
@@ -35,15 +35,15 @@ class WordBook
                             'sample_sentence'   => 'Prosper has finished the curriculum, Tight.',
                             'likes'             => 0,
                             'unlikes'           => 0,
-                        ]
+                        ],
         ];
     }
 
-
     /**
-     * [__get description]
+     * [__get description].
      *
-     * @param  string $slang The slang to be 'gotten' from the array.
+     * @param string $slang The slang to be 'gotten' from the array.
+     *
      * @return [type] The array of the slang that was called. This is a simple use of the magic method.
      */
     public function __get($slang)
@@ -55,9 +55,10 @@ class WordBook
      * [add description] - Adds a slang to the main array of the urban dicitonary.
      * Throws and error if the slang to be added is already existng in the dictioanry.
      *
-     * @param string $slang       the slang to be added to dictionary
-     * @param string $description a brief description or meaning of he slang to be added to the dictionary. Not optional
-     * @param string $sample_sentence    A sample sentece showing a simple usage of the slang. THis is optinal
+     * @param string $slang           the slang to be added to dictionary
+     * @param string $description     a brief description or meaning of he slang to be added to the dictionary. Not optional
+     * @param string $sample_sentence A sample sentece showing a simple usage of the slang. THis is optinal
+     *
      * @return array The main array with the new slang added to it.
      */
     public function add($slang, $description, $sample_sentence = '')
@@ -73,17 +74,18 @@ class WordBook
             'likes'             => 0,
             'unlikes'           => 0,
             ];
+
         return $this->main;
     }
-
 
     /**
      * [retrieve description] - Retrieves informstion form the main array.
      * Throws an exceptio if the given slang is not founc in the dictionary
      * Throws an exception if the property to be retrieved is not amnong the properties array.
      *
-     * @param  string $slang    The slang whose data is to be retrieved.
-     * @param  string $property The property whose value is to be retrieved. This defaults to description but can be set as the sample usage sentence.
+     * @param string $slang    The slang whose data is to be retrieved.
+     * @param string $property The property whose value is to be retrieved. This defaults to description but can be set as the sample usage sentence.
+     *
      * @return string - The value of the property as defined byt the property paramenter/argument.
      */
     public function retrieve($slang, $property = 'description')
@@ -107,9 +109,10 @@ class WordBook
      * Throws an exception if the slang is not found in the main array.
      * Throws an exception if the property to be updated is not among the properties array.
      *
-     * @param  string $slang - the slang ti be updated. THis is the key of the main array.
-     * @param  string $value  - The new value with which to update the property.  THis must be provided.
-     * @param  string $property - The is the property to update. It defaults to the description but can be set to the sample sentence.
+     * @param string $slang    - the slang ti be updated. THis is the key of the main array.
+     * @param string $value    - The new value with which to update the property.  THis must be provided.
+     * @param string $property - The is the property to update. It defaults to the description but can be set to the sample sentence.
+     *
      * @return array - The main array with the update effected.
      */
     public function update($slang, $value = '', $property = 'description')
@@ -128,13 +131,15 @@ class WordBook
         }
         // If everything is OK, return the main array (the dicitonary array) with the updated information.
         $this->main[$slang][$property] = $value;
+
         return $this->main;
     }
 
     /**
-     * [delete description] - Deletes a slang from the main array by unsetting the slang key within the main array
+     * [delete description] - Deletes a slang from the main array by unsetting the slang key within the main array.
      *
-     * @param  string $slang This is the slang to be deleted from the main array. Throws an exepotion if the slang cannot be found
+     * @param string $slang This is the slang to be deleted from the main array. Throws an exepotion if the slang cannot be found
+     *
      * @return array - Return the array with the slang deleted.
      */
     public function delete($slang)
@@ -145,6 +150,7 @@ class WordBook
         }
         // If everything is OK, delete(unset) the slang from the main array (that contains the diciotnary words)
         unset($this->main[$slang]);
+
         return $this->main;
     }
 
@@ -159,7 +165,7 @@ class WordBook
     }
 
     /**
-     * The next slang in the dictionary
+     * The next slang in the dictionary.
      *
      * @return array The array of the next slang in the dictionary
      */
@@ -178,9 +184,8 @@ class WordBook
         return end($this->main);
     }
 
-
     /**
-     * The current slang inside the dictionary
+     * The current slang inside the dictionary.
      *
      * @return array The array containing the current element being focused on in the array.
      */
@@ -190,10 +195,10 @@ class WordBook
     }
 
     /**
-     * The first slang in the array
+     * The first slang in the array.
      *
      * @return array The array contataining the first slang in the array.
-     * This moves the pointer to the first slang int he dictionary
+     *               This moves the pointer to the first slang int he dictionary
      */
     public function first()
     {
@@ -201,28 +206,32 @@ class WordBook
     }
 
     /**
-    * Select all slangs whose slangs are similar.
-    *
-    * @param  'string' $string The string to be used for the search.
-    * @return array The return value is the array of all words that start with the letter of the string.
-    */
+     * Select all slangs whose slangs are similar.
+     *
+     * @param 'string' $string The string to be used for the search.
+     *
+     * @return array The return value is the array of all words that start with the letter of the string.
+     */
     public function startsWith($string)
     {
         $n = strlen($string);
         $sels = array_filter($this->allSlangs(), function ($slang) use ($string, $n) { return $string == substr($slang, 0, $n); });
+
         return array_values($sels);
     }
 
     /**
      * Selects all slang that end with the letters of the parameter string.
      *
-     * @param  string $string The string to be used for the search.
+     * @param string $string The string to be used for the search.
+     *
      * @return array The return value is teh arry of all words that end wtith the letters of the string.
      */
     public function endsWith($string)
     {
         $n = strlen($string);
         $sels = array_filter($this->allSlangs(), function ($slang) use ($string, $n) { return $string == substr($slang, -$n, $n); });
+
         return array_values($sels);
     }
 
@@ -239,111 +248,124 @@ class WordBook
     /**
      * Fetch the array of the slang beign requested for.
      *
-     * @param  string $slang The slang for which it is rrequired to find its details.
+     * @param string $slang The slang for which it is rrequired to find its details.
+     *
      * @return array The return value is the full array containing all the properties of the slang,
-     * including the slang name, description, sample_sentence, likes and unlikes.
+     *               including the slang name, description, sample_sentence, likes and unlikes.
      */
     public function fetch($slang)
     {
         $this->throwExcpIfNoSlang($slang);
+
         return $this->main[$slang];
     }
-
 
     /**
      * Gets the number of likes ot the slang that is given.
      *
-     * @param  string $slang The slang for which we need to get its number of likes.
-     * @return integer  The integer value representing the number of likes of the slang in question.
+     * @param string $slang The slang for which we need to get its number of likes.
+     *
+     * @return int The integer value representing the number of likes of the slang in question.
      */
     public function likes($slang)
     {
         $this->throwExcpIfNoSlang($slang);
+
         return $this->main[$slang]['likes'];
     }
 
     /**
      * Gets the number of unlikes ot the slang that is given.
      *
-     * @param  string $slang The slang for which we need to get its number of unlikes.
-     * @return integer  The integer value representing the number of unlikes of the slang in question.
+     * @param string $slang The slang for which we need to get its number of unlikes.
+     *
+     * @return int The integer value representing the number of unlikes of the slang in question.
      */
     public function unlikes($slang)
     {
         $this->throwExcpIfNoSlang($slang);
+
         return $this->main[$slang]['unlikes'];
     }
-
 
     /**
      * The action to like the slang.
      *
-     * @param  string $slang The slang to be liked.
-     * @return interger    The return value is the number of likes after being incremented by 1.
+     * @param string $slang The slang to be liked.
+     *
+     * @return interger The return value is the number of likes after being incremented by 1.
      */
     public function like($slang)
     {
         $this->throwExcpIfNoSlang($slang);
+
         return ++$this->main[$slang]['likes'];
     }
 
     /**
      * The action to unlike a slang.
      *
-     * @param  string $slang The slang to be unliked.
-     * @return integer       The number of unlikes if the slang after being incremented by 1.
+     * @param string $slang The slang to be unliked.
+     *
+     * @return int The number of unlikes if the slang after being incremented by 1.
      */
     public function unlike($slang)
     {
         $this->throwExcpIfNoSlang($slang);
+
         return ++$this->main[$slang]['unlikes'];
     }
 
     /**
      * the action to remove a 'like' from a slang.
      *
-     * @param  string $slang This is the slang tfor which it required to reduce it numebr of likes.
-     * @return integer        The number of likes of the slang in question, after being decremented by 1.
+     * @param string $slang This is the slang tfor which it required to reduce it numebr of likes.
+     *
+     * @return int The number of likes of the slang in question, after being decremented by 1.
      */
     public function removeLike($slang)
     {
         $this->throwExcpIfNoSlang($slang);
+
         return --$this->main[$slang]['likes'];
     }
-
 
     /**
      * The action to remove an 'unlike' from a slang.
      *
-     * @param  string $slang The slang for which it is required to rduce uts number of unlikes.
-     * @return integer        The number of unlikes of the slang in question, after being decremented by 1.
+     * @param string $slang The slang for which it is required to rduce uts number of unlikes.
+     *
+     * @return int The number of unlikes of the slang in question, after being decremented by 1.
      */
     public function removeUnlike($slang)
     {
         $this->throwExcpIfNoSlang($slang);
+
         return --$this->main[$slang]['unlikes'];
     }
-
 
     /**
      * The action to view the rating of a slang. This action word with like() and unlike().
      *
-     * @param  string $slang The slang for which its rating is required.
-     * @return integer        The rating value in percentage and float. highes rating is 100%.
+     * @param string $slang The slang for which its rating is required.
+     *
+     * @return int The rating value in percentage and float. highes rating is 100%.
      */
     public function rating($slang)
     {
         $total = $this->likes($slang) + $this->unlikes($slang);
         $likes = $this->likes($slang);
-        $rating = (($likes / $total)*100);
+        $rating = (($likes / $total) * 100);
+
         return $rating;
     }
 
     /**
      * [slangExists description] - Checks whether a slang is inside the main array.
      *
-     * @param  string $slang the slang to be searched for inside the main array.
-     * @return bool  - true is the slang exists or false otherwise.
+     * @param string $slang the slang to be searched for inside the main array.
+     *
+     * @return bool - true is the slang exists or false otherwise.
      */
     public function slangExists($slang)
     {
@@ -351,21 +373,23 @@ class WordBook
         return in_array($slang, $this->allSlangs());
     }
 
-
     /**
      * This function throws an exception if the $slang does not exist in the dictionary.
-     * @param  string $slang This is the slang to be chcked in the dictionary.
+     *
+     * @param string $slang This is the slang to be chcked in the dictionary.
+     *
      * @return It throws an exception if slangExists function return false, but throws nothing (or null) otherwise.
      */
     public function throwExcpIfNoSlang($slang)
     {
-        $this->slangExists($slang) ? : $this->throwError("$slang is not found in the dictionary.");
+        $this->slangExists($slang) ?: $this->throwError("$slang is not found in the dictionary.");
     }
 
     /**
      * [throwError description] Throws an exception depending ont he message that was given to it.
      *
-     * @param  string $msg The message to be displayed as the excetion pesssage when caught.
+     * @param string $msg The message to be displayed as the excetion pesssage when caught.
+     *
      * @return Stops the flow of code because an exception is thrown.
      */
     public function throwError($msg)
@@ -373,5 +397,4 @@ class WordBook
         // Throw a new WordException with a customized message that depends on what was passed to it.
         throw new WordException($msg);
     }
-
 }
