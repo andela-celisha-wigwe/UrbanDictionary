@@ -5,7 +5,7 @@ php:
 
 script:
     - mkdir -p build/logs
-    - phpunit --coverage-clover build/logs/clover.xml
-after_script:
     - composer install
+after_script:
     - php vendor/bin/coveralls -v
+    - phpunit --coverage-clover build/logs/clover.xml
