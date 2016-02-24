@@ -1,7 +1,5 @@
 <?php
 
-namespace Elchroy\Tests;
-
 use Elchroy\UrbanDictionary\Category;
 
 class CategoryTest extends \PHPUnit_Framework_TestCase

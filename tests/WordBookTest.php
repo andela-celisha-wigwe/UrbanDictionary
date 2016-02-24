@@ -1,7 +1,5 @@
 <?php
 
-namespace Elchroy\Tests;
-
 use Elchroy\UrbanDictionary\Word;
 use Elchroy\UrbanDictionary\WordBook;
 
